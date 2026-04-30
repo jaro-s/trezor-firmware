@@ -764,6 +764,8 @@ class MessageType(IntEnum):
     BenchmarkResult = 9103
     TelemetryGet = 1100
     Telemetry = 1101
+    KvGetAuthority = 2110
+    KvAuthority = 2111
 
 
 class BenchmarkListNames(protobuf.MessageType):
@@ -3241,6 +3243,27 @@ class PaymentNotification(protobuf.MessageType):
         payment_req: Optional["PaymentRequest"] = None,
     ) -> None:
         self.payment_req = payment_req
+
+
+class KvGetAuthority(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 2110
+
+
+class KvAuthority(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 2111
+    FIELDS = {
+        1: protobuf.Field("schema_version", "uint32", repeated=False, required=True),
+        2: protobuf.Field("public_key", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        schema_version: "int",
+        public_key: "bytes",
+    ) -> None:
+        self.schema_version = schema_version
+        self.public_key = public_key
 
 
 class Initialize(protobuf.MessageType):

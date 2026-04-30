@@ -2017,6 +2017,28 @@ if TYPE_CHECKING:
         def is_type_of(cls, msg: Any) -> TypeGuard["PaymentNotification"]:
             return isinstance(msg, cls)
 
+    class KvGetAuthority(protobuf.MessageType):
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["KvGetAuthority"]:
+            return isinstance(msg, cls)
+
+    class KvAuthority(protobuf.MessageType):
+        schema_version: "int"
+        public_key: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            schema_version: "int",
+            public_key: "AnyBytes",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["KvAuthority"]:
+            return isinstance(msg, cls)
+
     class Initialize(protobuf.MessageType):
         session_id: "AnyBytes | None"
         derive_cardano: "bool | None"

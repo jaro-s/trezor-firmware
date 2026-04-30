@@ -2150,6 +2150,310 @@ impl ::protobuf::reflect::ProtobufValue for PaymentNotification {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
+// @@protoc_insertion_point(message:hw.trezor.messages.crypto.KvGetAuthority)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct KvGetAuthority {
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.crypto.KvGetAuthority.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a KvGetAuthority {
+    fn default() -> &'a KvGetAuthority {
+        <KvGetAuthority as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl KvGetAuthority {
+    pub fn new() -> KvGetAuthority {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(0);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<KvGetAuthority>(
+            "KvGetAuthority",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for KvGetAuthority {
+    const NAME: &'static str = "KvGetAuthority";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> KvGetAuthority {
+        KvGetAuthority::new()
+    }
+
+    fn clear(&mut self) {
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static KvGetAuthority {
+        static instance: KvGetAuthority = KvGetAuthority {
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for KvGetAuthority {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("KvGetAuthority").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for KvGetAuthority {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for KvGetAuthority {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hw.trezor.messages.crypto.KvAuthority)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct KvAuthority {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvAuthority.schema_version)
+    pub schema_version: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvAuthority.public_key)
+    pub public_key: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.crypto.KvAuthority.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a KvAuthority {
+    fn default() -> &'a KvAuthority {
+        <KvAuthority as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl KvAuthority {
+    pub fn new() -> KvAuthority {
+        ::std::default::Default::default()
+    }
+
+    // required uint32 schema_version = 1;
+
+    pub fn schema_version(&self) -> u32 {
+        self.schema_version.unwrap_or(0)
+    }
+
+    pub fn clear_schema_version(&mut self) {
+        self.schema_version = ::std::option::Option::None;
+    }
+
+    pub fn has_schema_version(&self) -> bool {
+        self.schema_version.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_schema_version(&mut self, v: u32) {
+        self.schema_version = ::std::option::Option::Some(v);
+    }
+
+    // required bytes public_key = 2;
+
+    pub fn public_key(&self) -> &[u8] {
+        match self.public_key.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_public_key(&mut self) {
+        self.public_key = ::std::option::Option::None;
+    }
+
+    pub fn has_public_key(&self) -> bool {
+        self.public_key.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_public_key(&mut self, v: ::std::vec::Vec<u8>) {
+        self.public_key = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_public_key(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.public_key.is_none() {
+            self.public_key = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.public_key.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_public_key(&mut self) -> ::std::vec::Vec<u8> {
+        self.public_key.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "schema_version",
+            |m: &KvAuthority| { &m.schema_version },
+            |m: &mut KvAuthority| { &mut m.schema_version },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "public_key",
+            |m: &KvAuthority| { &m.public_key },
+            |m: &mut KvAuthority| { &mut m.public_key },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<KvAuthority>(
+            "KvAuthority",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for KvAuthority {
+    const NAME: &'static str = "KvAuthority";
+
+    fn is_initialized(&self) -> bool {
+        if self.schema_version.is_none() {
+            return false;
+        }
+        if self.public_key.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.schema_version = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                18 => {
+                    self.public_key = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.schema_version {
+            my_size += ::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.public_key.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(2, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.schema_version {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.public_key.as_ref() {
+            os.write_bytes(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> KvAuthority {
+        KvAuthority::new()
+    }
+
+    fn clear(&mut self) {
+        self.schema_version = ::std::option::Option::None;
+        self.public_key = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static KvAuthority {
+        static instance: KvAuthority = KvAuthority {
+            schema_version: ::std::option::Option::None,
+            public_key: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for KvAuthority {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("KvAuthority").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for KvAuthority {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for KvAuthority {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
 static file_descriptor_proto_data: &'static [u8] = b"\
     \n\x15messages-crypto.proto\x12\x19hw.trezor.messages.crypto\x1a\x15mess\
     ages-common.proto\x1a\roptions.proto\"\xcb\x01\n\x0eCipherKeyValue\x12\
@@ -2178,8 +2482,10 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x18\x01\x20\x02(\x0cR\nsessionKey\x12\x1d\n\npublic_key\x18\x02\x20\x01\
     (\x0cR\tpublicKey\"a\n\x13PaymentNotification\x12J\n\x0bpayment_req\x18\
     \x01\x20\x01(\x0b2).hw.trezor.messages.common.PaymentRequestR\npaymentRe\
-    qB>\n#com.satoshilabs.trezor.lib.protobufB\x13TrezorMessageCrypto\x80\
-    \xa6\x1d\x01\
+    q\"\x10\n\x0eKvGetAuthority\"S\n\x0bKvAuthority\x12%\n\x0eschema_version\
+    \x18\x01\x20\x02(\rR\rschemaVersion\x12\x1d\n\npublic_key\x18\x02\x20\
+    \x02(\x0cR\tpublicKeyB>\n#com.satoshilabs.trezor.lib.protobufB\x13Trezor\
+    MessageCrypto\x80\xa6\x1d\x01\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -2199,7 +2505,7 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             let mut deps = ::std::vec::Vec::with_capacity(2);
             deps.push(super::messages_common::file_descriptor().clone());
             deps.push(super::options::file_descriptor().clone());
-            let mut messages = ::std::vec::Vec::with_capacity(8);
+            let mut messages = ::std::vec::Vec::with_capacity(10);
             messages.push(CipherKeyValue::generated_message_descriptor_data());
             messages.push(CipheredKeyValue::generated_message_descriptor_data());
             messages.push(IdentityType::generated_message_descriptor_data());
@@ -2208,6 +2514,8 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(GetECDHSessionKey::generated_message_descriptor_data());
             messages.push(ECDHSessionKey::generated_message_descriptor_data());
             messages.push(PaymentNotification::generated_message_descriptor_data());
+            messages.push(KvGetAuthority::generated_message_descriptor_data());
+            messages.push(KvAuthority::generated_message_descriptor_data());
             let mut enums = ::std::vec::Vec::with_capacity(0);
             ::protobuf::reflect::GeneratedFileDescriptor::new_generated(
                 file_descriptor_proto(),

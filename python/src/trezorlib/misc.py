@@ -30,6 +30,11 @@ def get_entropy(session: "Session", size: int) -> bytes:
 
 
 @workflow(capability=messages.Capability.Crypto)
+def get_kv_authority(session: "Session") -> messages.KvAuthority:
+    return session.call(messages.KvGetAuthority(), expect=messages.KvAuthority)
+
+
+@workflow(capability=messages.Capability.Crypto)
 def sign_identity(
     session: "Session",
     identity: messages.IdentityType,

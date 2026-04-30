@@ -100,3 +100,20 @@ message ECDHSessionKey {
 message PaymentNotification {
     optional common.PaymentRequest payment_req = 1;  // SLIP-24 payment request
 }
+
+/**
+ * Request: Ask device for KV authority public key
+ * @start
+ * @next KvAuthority
+ * @next Failure
+ */
+message KvGetAuthority {}
+
+/**
+ * Response: Device provides KV authority metadata
+ * @end
+ */
+message KvAuthority {
+    required uint32 schema_version = 1;
+    required bytes public_key = 2;
+}

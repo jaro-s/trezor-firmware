@@ -595,6 +595,10 @@ pub enum MessageType {
     MessageType_TelemetryGet = 1100,
     // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_Telemetry)
     MessageType_Telemetry = 1101,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_KvGetAuthority)
+    MessageType_KvGetAuthority = 2110,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_KvAuthority)
+    MessageType_KvAuthority = 2111,
 }
 
 impl ::protobuf::Enum for MessageType {
@@ -890,6 +894,8 @@ impl ::protobuf::Enum for MessageType {
             9103 => ::std::option::Option::Some(MessageType::MessageType_BenchmarkResult),
             1100 => ::std::option::Option::Some(MessageType::MessageType_TelemetryGet),
             1101 => ::std::option::Option::Some(MessageType::MessageType_Telemetry),
+            2110 => ::std::option::Option::Some(MessageType::MessageType_KvGetAuthority),
+            2111 => ::std::option::Option::Some(MessageType::MessageType_KvAuthority),
             _ => ::std::option::Option::None
         }
     }
@@ -1180,6 +1186,8 @@ impl ::protobuf::Enum for MessageType {
             "MessageType_BenchmarkResult" => ::std::option::Option::Some(MessageType::MessageType_BenchmarkResult),
             "MessageType_TelemetryGet" => ::std::option::Option::Some(MessageType::MessageType_TelemetryGet),
             "MessageType_Telemetry" => ::std::option::Option::Some(MessageType::MessageType_Telemetry),
+            "MessageType_KvGetAuthority" => ::std::option::Option::Some(MessageType::MessageType_KvGetAuthority),
+            "MessageType_KvAuthority" => ::std::option::Option::Some(MessageType::MessageType_KvAuthority),
             _ => ::std::option::Option::None
         }
     }
@@ -1469,6 +1477,8 @@ impl ::protobuf::Enum for MessageType {
         MessageType::MessageType_BenchmarkResult,
         MessageType::MessageType_TelemetryGet,
         MessageType::MessageType_Telemetry,
+        MessageType::MessageType_KvGetAuthority,
+        MessageType::MessageType_KvAuthority,
     ];
 }
 
@@ -1764,6 +1774,8 @@ impl ::protobuf::EnumFull for MessageType {
             MessageType::MessageType_BenchmarkResult => 281,
             MessageType::MessageType_TelemetryGet => 282,
             MessageType::MessageType_Telemetry => 283,
+            MessageType::MessageType_KvGetAuthority => 284,
+            MessageType::MessageType_KvAuthority => 285,
         };
         Self::enum_descriptor().value_by_index(index)
     }
@@ -1782,7 +1794,7 @@ impl MessageType {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x0emessages.proto\x12\x12hw.trezor.messages\x1a\roptions.proto*\xdec\
+    \n\x0emessages.proto\x12\x12hw.trezor.messages\x1a\roptions.proto*\xb1d\
     \n\x0bMessageType\x12(\n\x16MessageType_Initialize\x10\0\x1a\x0c\xb0\xb5\
     \x18\x01\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12\x1e\n\x10MessageType_Ping\
     \x10\x01\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12%\n\x13MessageType_S\
@@ -2108,13 +2120,15 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x04\x80\xa6\x1d\x01\x12&\n\x1bMessageType_BenchmarkResult\x10\x8fG\x1a\
     \x04\x80\xa6\x1d\x01\x12'\n\x18MessageType_TelemetryGet\x10\xcc\x08\x1a\
     \x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12$\n\x15MessageType_Telemetry\x10\
-    \xcd\x08\x1a\x08\x80\xa6\x1d\x01\x98\xb5\x18\x01\x1a\x08\xc8\xf3\x18\x01\
-    \xd0\xf3\x18\x01\"\x04\x08Z\x10\\\"\x04\x08G\x10J\"\x04\x08r\x10z\"\x05\
-    \x08{\x10\x95\x01\"\x06\x08\xdb\x01\x10\xdb\x01\"\x06\x08\xe0\x01\x10\
-    \xe0\x01\"\x06\x08\xac\x02\x10\xb0\x02\"\x06\x08\xb5\x02\x10\xb8\x02\"\
-    \x06\x08\xbc\x05\x10\xc5\x05\"\x06\x08\xe9\x07\x10\xf7\x07\"\x06\x08\xfa\
-    \x07\x10\xcb\x08B8\n#com.satoshilabs.trezor.lib.protobufB\rTrezorMessage\
-    \x80\xa6\x1d\x01\
+    \xcd\x08\x1a\x08\x80\xa6\x1d\x01\x98\xb5\x18\x01\x12)\n\x1aMessageType_K\
+    vGetAuthority\x10\xbe\x10\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12&\n\
+    \x17MessageType_KvAuthority\x10\xbf\x10\x1a\x08\x80\xa6\x1d\x01\x98\xb5\
+    \x18\x01\x1a\x08\xc8\xf3\x18\x01\xd0\xf3\x18\x01\"\x04\x08Z\x10\\\"\x04\
+    \x08G\x10J\"\x04\x08r\x10z\"\x05\x08{\x10\x95\x01\"\x06\x08\xdb\x01\x10\
+    \xdb\x01\"\x06\x08\xe0\x01\x10\xe0\x01\"\x06\x08\xac\x02\x10\xb0\x02\"\
+    \x06\x08\xb5\x02\x10\xb8\x02\"\x06\x08\xbc\x05\x10\xc5\x05\"\x06\x08\xe9\
+    \x07\x10\xf7\x07\"\x06\x08\xfa\x07\x10\xcb\x08B8\n#com.satoshilabs.trezo\
+    r.lib.protobufB\rTrezorMessage\x80\xa6\x1d\x01\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file

@@ -111,6 +111,8 @@ def _find_message_handler_module(msg_type: int) -> str:
         return "apps.misc.get_firmware_hash"
     if msg_type == MessageType.PaymentNotification:
         return "apps.misc.payment_notification"
+    if msg_type == MessageType.KvGetAuthority:
+        return "apps.misc.kv_get_authority"
 
     # evolu
     if msg_type == MessageType.EvoluGetNode:

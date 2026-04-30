@@ -705,3 +705,5 @@ if TYPE_CHECKING:
         BenchmarkResult = 9103
         TelemetryGet = 1100
         Telemetry = 1101
+        KvGetAuthority = 2110
+        KvAuthority = 2111

@@ -381,4 +381,8 @@ enum MessageType {
     // Telemetry
     MessageType_TelemetryGet = 1100 [(bitcoin_only) = true, (wire_in) = true];
     MessageType_Telemetry = 1101 [(bitcoin_only) = true, (wire_out) = true];
+
+    // KV
+    MessageType_KvGetAuthority = 2110 [(bitcoin_only) = true, (wire_in) = true];
+    MessageType_KvAuthority = 2111 [(bitcoin_only) = true, (wire_out) = true];
 }
