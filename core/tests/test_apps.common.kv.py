@@ -11,6 +11,7 @@ from kv_vectors import (
     INDEX_KEY_HEX,
     RECORD_VECTORS,
     ROOT_AFTER_1_HEX,
+    ROOT_AFTER_2_HEX,
     ROOT_AFTER_3_HEX,
     ROOT_AFTER_DELETE_HEX,
     ROOT_AFTER_UPDATE_HEX,
@@ -21,6 +22,13 @@ from apps.common import kv, kv_serialize
 
 
 class TestKv(unittest.TestCase):
+    def _keys(self):
+        sign_secret_key = unhexlify(SIGN_SECRET_KEY_HEX)
+        return sign_secret_key, kv.public_key(sign_secret_key), unhexlify(INDEX_KEY_HEX)
+
+    def _invalidate(self, data):
+        return data[:-1] + bytes([data[-1] ^ 1])
+
     def test_head_hash_vectors(self):
         self.assertEqual(
             kv.head_hash(kv.SCHEMA_VERSION, 0, unhexlify(EMPTY_ROOT_HEX), b""),
@@ -171,6 +179,342 @@ class TestKv(unittest.TestCase):
             proposed_new_root=unhexlify(ROOT_AFTER_DELETE_HEX),
         )
         self.assertEqual(delete_head["records_root"], unhexlify(ROOT_AFTER_DELETE_HEX))
+
+    def test_chained_add_transitions(self):
+        sign_secret_key, public_key, index_key = self._keys()
+        alice = RECORD_VECTORS[0]
+        bob = RECORD_VECTORS[1]
+
+        alice_leaf_key = unhexlify(alice["record_id_hex"])
+        first_head = kv.create_signed_transition(
+            sign_secret_key=sign_secret_key,
+            public_key=public_key,
+            index_key=index_key,
+            schema_version=kv.SCHEMA_VERSION,
+            operation=kv.OP_ADD,
+            old_head_seq=0,
+            old_head_root=unhexlify(EMPTY_ROOT_HEX),
+            old_head_prev_hash=b"",
+            old_head_signature=b"",
+            key=alice["key"],
+            old_value=None,
+            new_value=alice["value"],
+            proof_exists=False,
+            proof_leaf_key=alice_leaf_key,
+            proof_leaf_hash=None,
+            proof_sibling_hashes=proof_for([], alice_leaf_key),
+            proposed_new_root=unhexlify(ROOT_AFTER_1_HEX),
+        )
+
+        bob_leaf_key = unhexlify(bob["record_id_hex"])
+        first_leaves = [
+            (
+                unhexlify(alice["record_id_hex"]),
+                unhexlify(alice["record_commitment_hex"]),
+            )
+        ]
+        second_head = kv.create_signed_transition(
+            sign_secret_key=sign_secret_key,
+            public_key=public_key,
+            index_key=index_key,
+            schema_version=kv.SCHEMA_VERSION,
+            operation=kv.OP_ADD,
+            old_head_seq=first_head["seq"],
+            old_head_root=first_head["records_root"],
+            old_head_prev_hash=first_head["prev_head_hash"],
+            old_head_signature=first_head["signature"],
+            key=bob["key"],
+            old_value=None,
+            new_value=bob["value"],
+            proof_exists=False,
+            proof_leaf_key=bob_leaf_key,
+            proof_leaf_hash=None,
+            proof_sibling_hashes=proof_for(first_leaves, bob_leaf_key),
+            proposed_new_root=unhexlify(ROOT_AFTER_2_HEX),
+        )
+        self.assertEqual(second_head["seq"], 2)
+        self.assertEqual(second_head["records_root"], unhexlify(ROOT_AFTER_2_HEX))
+        self.assertEqual(
+            second_head["prev_head_hash"],
+            kv.head_hash(
+                first_head["schema_version"],
+                first_head["seq"],
+                first_head["records_root"],
+                first_head["prev_head_hash"],
+            ),
+        )
+        self.assertTrue(
+            kv.verify_head(
+                public_key,
+                second_head["schema_version"],
+                second_head["seq"],
+                second_head["records_root"],
+                second_head["prev_head_hash"],
+                second_head["signature"],
+            )
+        )
+
+    def test_verify_record(self):
+        sign_secret_key, public_key, index_key = self._keys()
+        bob = RECORD_VECTORS[1]
+        leaves = [(record_id, commitment) for _, _, record_id, commitment in vector_records()]
+        bob_leaf_key = unhexlify(bob["record_id_hex"])
+        bob_leaf_hash = kv._record_leaf_hash(index_key, bob["key"], bob["value"])[1]
+        bob_siblings = proof_for(leaves, bob_leaf_key)
+
+        signature = kv.sign_head(
+            sign_secret_key,
+            kv.SCHEMA_VERSION,
+            3,
+            unhexlify(ROOT_AFTER_3_HEX),
+            b"\x11" * 32,
+        )
+
+        self.assertTrue(
+            kv.verify_record(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                seq=3,
+                records_root=unhexlify(ROOT_AFTER_3_HEX),
+                prev_head_hash=b"\x11" * 32,
+                signature=signature,
+                key=bob["key"],
+                value=bob["value"],
+                proof_exists=True,
+                proof_leaf_key=bob_leaf_key,
+                proof_leaf_hash=bob_leaf_hash,
+                proof_sibling_hashes=bob_siblings,
+            )
+        )
+        self.assertFalse(
+            kv.verify_record(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                seq=3,
+                records_root=unhexlify(ROOT_AFTER_3_HEX),
+                prev_head_hash=b"\x11" * 32,
+                signature=self._invalidate(signature),
+                key=bob["key"],
+                value=bob["value"],
+                proof_exists=True,
+                proof_leaf_key=bob_leaf_key,
+                proof_leaf_hash=bob_leaf_hash,
+                proof_sibling_hashes=bob_siblings,
+            )
+        )
+        self.assertFalse(
+            kv.verify_record(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                seq=3,
+                records_root=unhexlify(ROOT_AFTER_3_HEX),
+                prev_head_hash=b"\x11" * 32,
+                signature=signature,
+                key=bob["key"],
+                value=bob["value"],
+                proof_exists=False,
+                proof_leaf_key=bob_leaf_key,
+                proof_leaf_hash=bob_leaf_hash,
+                proof_sibling_hashes=bob_siblings,
+            )
+        )
+        self.assertFalse(
+            kv.verify_record(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                seq=3,
+                records_root=unhexlify(ROOT_AFTER_3_HEX),
+                prev_head_hash=b"\x11" * 32,
+                signature=signature,
+                key=bob["key"],
+                value=bob["value"],
+                proof_exists=True,
+                proof_leaf_key=self._invalidate(bob_leaf_key),
+                proof_leaf_hash=bob_leaf_hash,
+                proof_sibling_hashes=bob_siblings,
+            )
+        )
+        self.assertFalse(
+            kv.verify_record(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                seq=3,
+                records_root=unhexlify(ROOT_AFTER_3_HEX),
+                prev_head_hash=b"\x11" * 32,
+                signature=signature,
+                key=bob["key"],
+                value=bob["value"],
+                proof_exists=True,
+                proof_leaf_key=bob_leaf_key,
+                proof_leaf_hash=self._invalidate(bob_leaf_hash),
+                proof_sibling_hashes=bob_siblings,
+            )
+        )
+        bad_siblings = list(bob_siblings)
+        bad_siblings[0] = self._invalidate(bad_siblings[0])
+        self.assertFalse(
+            kv.verify_record(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                seq=3,
+                records_root=unhexlify(ROOT_AFTER_3_HEX),
+                prev_head_hash=b"\x11" * 32,
+                signature=signature,
+                key=bob["key"],
+                value=bob["value"],
+                proof_exists=True,
+                proof_leaf_key=bob_leaf_key,
+                proof_leaf_hash=bob_leaf_hash,
+                proof_sibling_hashes=bad_siblings,
+            )
+        )
+
+    def test_validate_transition_rejects_invalid_inputs(self):
+        sign_secret_key, public_key, index_key = self._keys()
+        alice = RECORD_VECTORS[0]
+        bob = RECORD_VECTORS[1]
+        leaves = [(record_id, commitment) for _, _, record_id, commitment in vector_records()]
+        bob_leaf_key = unhexlify(bob["record_id_hex"])
+        bob_leaf_hash = kv._record_leaf_hash(index_key, bob["key"], bob["value"])[1]
+        bob_siblings = proof_for(leaves, bob_leaf_key)
+
+        valid_signature = kv.sign_head(
+            sign_secret_key,
+            kv.SCHEMA_VERSION,
+            3,
+            unhexlify(ROOT_AFTER_3_HEX),
+            b"\x11" * 32,
+        )
+
+        with self.assertRaises(ValueError):
+            kv.validate_transition(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                operation=kv.OP_UPDATE,
+                old_head_seq=0,
+                old_head_root=unhexlify(EMPTY_ROOT_HEX),
+                old_head_prev_hash=b"",
+                old_head_signature=b"",
+                key=alice["key"],
+                old_value=alice["value"],
+                new_value="value-one-updated",
+                proof_exists=True,
+                proof_leaf_key=unhexlify(alice["record_id_hex"]),
+                proof_leaf_hash=kv._record_leaf_hash(
+                    index_key, alice["key"], alice["value"]
+                )[1],
+                proof_sibling_hashes=proof_for([], unhexlify(alice["record_id_hex"])),
+                proposed_new_root=unhexlify(ROOT_AFTER_1_HEX),
+            )
+
+        with self.assertRaises(ValueError):
+            kv.validate_transition(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                operation=kv.OP_ADD,
+                old_head_seq=3,
+                old_head_root=unhexlify(ROOT_AFTER_3_HEX),
+                old_head_prev_hash=b"\x11" * 32,
+                old_head_signature=self._invalidate(valid_signature),
+                key="carol",
+                old_value=None,
+                new_value="value-three",
+                proof_exists=False,
+                proof_leaf_key=kv_serialize.record_id(index_key, "carol"),
+                proof_leaf_hash=None,
+                proof_sibling_hashes=proof_for(
+                    leaves, kv_serialize.record_id(index_key, "carol")
+                ),
+                proposed_new_root=unhexlify(ROOT_AFTER_3_HEX),
+            )
+
+        with self.assertRaises(ValueError):
+            kv.validate_transition(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                operation=kv.OP_UPDATE,
+                old_head_seq=3,
+                old_head_root=unhexlify(ROOT_AFTER_3_HEX),
+                old_head_prev_hash=b"\x11" * 32,
+                old_head_signature=valid_signature,
+                key=bob["key"],
+                old_value=bob["value"],
+                new_value="value-2-updated",
+                proof_exists=True,
+                proof_leaf_key=self._invalidate(bob_leaf_key),
+                proof_leaf_hash=bob_leaf_hash,
+                proof_sibling_hashes=bob_siblings,
+                proposed_new_root=unhexlify(ROOT_AFTER_UPDATE_HEX),
+            )
+
+        with self.assertRaises(ValueError):
+            kv.validate_transition(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                operation=kv.OP_UPDATE,
+                old_head_seq=3,
+                old_head_root=unhexlify(ROOT_AFTER_3_HEX),
+                old_head_prev_hash=b"\x11" * 32,
+                old_head_signature=valid_signature,
+                key=bob["key"],
+                old_value=bob["value"],
+                new_value="value-2-updated",
+                proof_exists=True,
+                proof_leaf_key=bob_leaf_key,
+                proof_leaf_hash=self._invalidate(bob_leaf_hash),
+                proof_sibling_hashes=bob_siblings,
+                proposed_new_root=unhexlify(ROOT_AFTER_UPDATE_HEX),
+            )
+
+        with self.assertRaises(ValueError):
+            kv.validate_transition(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                operation=kv.OP_UPDATE,
+                old_head_seq=3,
+                old_head_root=unhexlify(ROOT_AFTER_3_HEX),
+                old_head_prev_hash=b"\x11" * 32,
+                old_head_signature=valid_signature,
+                key=bob["key"],
+                old_value=bob["value"],
+                new_value="value-2-updated",
+                proof_exists=True,
+                proof_leaf_key=bob_leaf_key,
+                proof_leaf_hash=bob_leaf_hash,
+                proof_sibling_hashes=[],
+                proposed_new_root=unhexlify(ROOT_AFTER_UPDATE_HEX),
+            )
+
+        with self.assertRaises(ValueError):
+            kv.validate_transition(
+                public_key=public_key,
+                index_key=index_key,
+                schema_version=kv.SCHEMA_VERSION,
+                operation=kv.OP_UPDATE,
+                old_head_seq=3,
+                old_head_root=unhexlify(ROOT_AFTER_3_HEX),
+                old_head_prev_hash=b"\x11" * 32,
+                old_head_signature=valid_signature,
+                key=bob["key"],
+                old_value=bob["value"],
+                new_value="value-2-updated",
+                proof_exists=True,
+                proof_leaf_key=bob_leaf_key,
+                proof_leaf_hash=bob_leaf_hash,
+                proof_sibling_hashes=bob_siblings,
+                proposed_new_root=unhexlify(ROOT_AFTER_3_HEX),
+            )
 
 
 if __name__ == "__main__":
