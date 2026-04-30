@@ -707,3 +707,5 @@ if TYPE_CHECKING:
         Telemetry = 1101
         KvGetAuthority = 2110
         KvAuthority = 2111
+        KvGetRecordId = 2112
+        KvRecordId = 2113

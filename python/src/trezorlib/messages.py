@@ -766,6 +766,8 @@ class MessageType(IntEnum):
     Telemetry = 1101
     KvGetAuthority = 2110
     KvAuthority = 2111
+    KvGetRecordId = 2112
+    KvRecordId = 2113
 
 
 class BenchmarkListNames(protobuf.MessageType):
@@ -3264,6 +3266,34 @@ class KvAuthority(protobuf.MessageType):
     ) -> None:
         self.schema_version = schema_version
         self.public_key = public_key
+
+
+class KvGetRecordId(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 2112
+    FIELDS = {
+        1: protobuf.Field("key", "string", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        key: "str",
+    ) -> None:
+        self.key = key
+
+
+class KvRecordId(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 2113
+    FIELDS = {
+        1: protobuf.Field("record_id", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        record_id: "bytes",
+    ) -> None:
+        self.record_id = record_id
 
 
 class Initialize(protobuf.MessageType):

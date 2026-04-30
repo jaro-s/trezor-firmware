@@ -113,6 +113,8 @@ def _find_message_handler_module(msg_type: int) -> str:
         return "apps.misc.payment_notification"
     if msg_type == MessageType.KvGetAuthority:
         return "apps.misc.kv_get_authority"
+    if msg_type == MessageType.KvGetRecordId:
+        return "apps.misc.kv_get_record_id"
 
     # evolu
     if msg_type == MessageType.EvoluGetNode:

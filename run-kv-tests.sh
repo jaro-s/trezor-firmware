@@ -12,11 +12,12 @@ test_apps.common.kv.py \
 test_apps.common.kv_auth.py \
 test_apps.common.kv_serialize.py \
 test_apps.common.kv_smt.py \
-test_apps.misc.kv_get_authority.py"
+test_apps.misc.kv_get_authority.py \
+test_apps.misc.kv_get_record_id.py"
 
 UV_CACHE_DIR=/tmp/uv-cache uv run core/emu.py \
   --disable-animation \
   --headless \
   --temporary-profile \
-  -c pytest tests/device_tests/misc/test_msg_kv_get_authority.py -q --lang=en
+  -c pytest tests/device_tests/misc/test_msg_kv_get_authority.py tests/device_tests/misc/test_msg_kv_get_record_id.py -q --lang=en
 UV_CACHE_DIR=/tmp/uv-cache uv run make -C core test TESTOPTS="test_apps.common.kv_serialize.py test_apps.common.kv_smt.py test_apps.common.kv.py test_apps.common.kv_auth.py"

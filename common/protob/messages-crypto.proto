@@ -117,3 +117,21 @@ message KvAuthority {
     required uint32 schema_version = 1;
     required bytes public_key = 2;
 }
+
+/**
+ * Request: Ask device for deterministic blinded record ID
+ * @start
+ * @next KvRecordId
+ * @next Failure
+ */
+message KvGetRecordId {
+    required string key = 1;
+}
+
+/**
+ * Response: Device provides deterministic record ID
+ * @end
+ */
+message KvRecordId {
+    required bytes record_id = 1;
+}
