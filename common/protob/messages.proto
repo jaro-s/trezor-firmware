@@ -385,4 +385,6 @@ enum MessageType {
     // KV
     MessageType_KvGetAuthority = 2110 [(bitcoin_only) = true, (wire_in) = true];
     MessageType_KvAuthority = 2111 [(bitcoin_only) = true, (wire_out) = true];
+    MessageType_KvGetRecordId = 2112 [(bitcoin_only) = true, (wire_in) = true];
+    MessageType_KvRecordId = 2113 [(bitcoin_only) = true, (wire_out) = true];
 }

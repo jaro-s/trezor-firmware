@@ -102,6 +102,8 @@ TelemetryGet = 1100
 Telemetry = 1101
 KvGetAuthority = 2110
 KvAuthority = 2111
+KvGetRecordId = 2112
+KvRecordId = 2113
 if __debug__:
     DebugLinkDecision = 100
     DebugLinkGetState = 101

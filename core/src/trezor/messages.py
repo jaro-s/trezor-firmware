@@ -2039,6 +2039,34 @@ if TYPE_CHECKING:
         def is_type_of(cls, msg: Any) -> TypeGuard["KvAuthority"]:
             return isinstance(msg, cls)
 
+    class KvGetRecordId(protobuf.MessageType):
+        key: "str"
+
+        def __init__(
+            self,
+            *,
+            key: "str",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["KvGetRecordId"]:
+            return isinstance(msg, cls)
+
+    class KvRecordId(protobuf.MessageType):
+        record_id: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            record_id: "AnyBytes",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["KvRecordId"]:
+            return isinstance(msg, cls)
+
     class Initialize(protobuf.MessageType):
         session_id: "AnyBytes | None"
         derive_cardano: "bool | None"

@@ -35,6 +35,11 @@ def get_kv_authority(session: "Session") -> messages.KvAuthority:
 
 
 @workflow(capability=messages.Capability.Crypto)
+def get_kv_record_id(session: "Session", key: str) -> messages.KvRecordId:
+    return session.call(messages.KvGetRecordId(key=key), expect=messages.KvRecordId)
+
+
+@workflow(capability=messages.Capability.Crypto)
 def sign_identity(
     session: "Session",
     identity: messages.IdentityType,
