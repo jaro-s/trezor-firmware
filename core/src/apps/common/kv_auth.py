@@ -26,7 +26,7 @@ def sign_private_key(keychain: "Keychain") -> bytes:
 def sign_public_key(keychain: "Keychain") -> bytes:
     return secp256k1.publickey(sign_private_key(keychain), False)
 
-
+# using a secp256k1 private key as random bytes for HMAC (!) 
 def index_key(keychain: "Keychain") -> bytes:
     return keychain.derive(KV_INDEX_PATH).private_key()
 
