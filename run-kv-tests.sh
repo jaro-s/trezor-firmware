@@ -19,3 +19,4 @@ UV_CACHE_DIR=/tmp/uv-cache uv run core/emu.py \
   --headless \
   --temporary-profile \
   -c pytest tests/device_tests/misc/test_msg_kv_get_authority.py -q --lang=en
+UV_CACHE_DIR=/tmp/uv-cache uv run make -C core test TESTOPTS="test_apps.common.kv_serialize.py test_apps.common.kv_smt.py test_apps.common.kv.py test_apps.common.kv_auth.py"
