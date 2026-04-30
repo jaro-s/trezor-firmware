@@ -688,6 +688,8 @@ if TYPE_CHECKING:
         EvoluDelegatedIdentityKey = 2105
         EvoluIndexManagement = 2106
         EvoluIndexManagementResponse = 2107
+        KvGetAuthority = 2110
+        KvAuthority = 2111
         TronGetAddress = 2200
         TronAddress = 2201
         TronSignTx = 2202
