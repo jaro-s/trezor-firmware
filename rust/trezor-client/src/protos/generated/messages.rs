@@ -561,10 +561,6 @@ pub enum MessageType {
     MessageType_EvoluIndexManagement = 2106,
     // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_EvoluIndexManagementResponse)
     MessageType_EvoluIndexManagementResponse = 2107,
-    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_KvGetAuthority)
-    MessageType_KvGetAuthority = 2110,
-    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_KvAuthority)
-    MessageType_KvAuthority = 2111,
     // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_TronGetAddress)
     MessageType_TronGetAddress = 2200,
     // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_TronAddress)
@@ -599,6 +595,10 @@ pub enum MessageType {
     MessageType_TelemetryGet = 1100,
     // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_Telemetry)
     MessageType_Telemetry = 1101,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_KvGetAuthority)
+    MessageType_KvGetAuthority = 2110,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_KvAuthority)
+    MessageType_KvAuthority = 2111,
 }
 
 impl ::protobuf::Enum for MessageType {
@@ -877,8 +877,6 @@ impl ::protobuf::Enum for MessageType {
             2105 => ::std::option::Option::Some(MessageType::MessageType_EvoluDelegatedIdentityKey),
             2106 => ::std::option::Option::Some(MessageType::MessageType_EvoluIndexManagement),
             2107 => ::std::option::Option::Some(MessageType::MessageType_EvoluIndexManagementResponse),
-            2110 => ::std::option::Option::Some(MessageType::MessageType_KvGetAuthority),
-            2111 => ::std::option::Option::Some(MessageType::MessageType_KvAuthority),
             2200 => ::std::option::Option::Some(MessageType::MessageType_TronGetAddress),
             2201 => ::std::option::Option::Some(MessageType::MessageType_TronAddress),
             2202 => ::std::option::Option::Some(MessageType::MessageType_TronSignTx),
@@ -896,6 +894,8 @@ impl ::protobuf::Enum for MessageType {
             9103 => ::std::option::Option::Some(MessageType::MessageType_BenchmarkResult),
             1100 => ::std::option::Option::Some(MessageType::MessageType_TelemetryGet),
             1101 => ::std::option::Option::Some(MessageType::MessageType_Telemetry),
+            2110 => ::std::option::Option::Some(MessageType::MessageType_KvGetAuthority),
+            2111 => ::std::option::Option::Some(MessageType::MessageType_KvAuthority),
             _ => ::std::option::Option::None
         }
     }
@@ -1169,8 +1169,6 @@ impl ::protobuf::Enum for MessageType {
             "MessageType_EvoluDelegatedIdentityKey" => ::std::option::Option::Some(MessageType::MessageType_EvoluDelegatedIdentityKey),
             "MessageType_EvoluIndexManagement" => ::std::option::Option::Some(MessageType::MessageType_EvoluIndexManagement),
             "MessageType_EvoluIndexManagementResponse" => ::std::option::Option::Some(MessageType::MessageType_EvoluIndexManagementResponse),
-            "MessageType_KvGetAuthority" => ::std::option::Option::Some(MessageType::MessageType_KvGetAuthority),
-            "MessageType_KvAuthority" => ::std::option::Option::Some(MessageType::MessageType_KvAuthority),
             "MessageType_TronGetAddress" => ::std::option::Option::Some(MessageType::MessageType_TronGetAddress),
             "MessageType_TronAddress" => ::std::option::Option::Some(MessageType::MessageType_TronAddress),
             "MessageType_TronSignTx" => ::std::option::Option::Some(MessageType::MessageType_TronSignTx),
@@ -1188,6 +1186,8 @@ impl ::protobuf::Enum for MessageType {
             "MessageType_BenchmarkResult" => ::std::option::Option::Some(MessageType::MessageType_BenchmarkResult),
             "MessageType_TelemetryGet" => ::std::option::Option::Some(MessageType::MessageType_TelemetryGet),
             "MessageType_Telemetry" => ::std::option::Option::Some(MessageType::MessageType_Telemetry),
+            "MessageType_KvGetAuthority" => ::std::option::Option::Some(MessageType::MessageType_KvGetAuthority),
+            "MessageType_KvAuthority" => ::std::option::Option::Some(MessageType::MessageType_KvAuthority),
             _ => ::std::option::Option::None
         }
     }
@@ -1460,8 +1460,6 @@ impl ::protobuf::Enum for MessageType {
         MessageType::MessageType_EvoluDelegatedIdentityKey,
         MessageType::MessageType_EvoluIndexManagement,
         MessageType::MessageType_EvoluIndexManagementResponse,
-        MessageType::MessageType_KvGetAuthority,
-        MessageType::MessageType_KvAuthority,
         MessageType::MessageType_TronGetAddress,
         MessageType::MessageType_TronAddress,
         MessageType::MessageType_TronSignTx,
@@ -1479,6 +1477,8 @@ impl ::protobuf::Enum for MessageType {
         MessageType::MessageType_BenchmarkResult,
         MessageType::MessageType_TelemetryGet,
         MessageType::MessageType_Telemetry,
+        MessageType::MessageType_KvGetAuthority,
+        MessageType::MessageType_KvAuthority,
     ];
 }
 
@@ -1757,25 +1757,25 @@ impl ::protobuf::EnumFull for MessageType {
             MessageType::MessageType_EvoluDelegatedIdentityKey => 264,
             MessageType::MessageType_EvoluIndexManagement => 265,
             MessageType::MessageType_EvoluIndexManagementResponse => 266,
-            MessageType::MessageType_KvGetAuthority => 267,
-            MessageType::MessageType_KvAuthority => 268,
-            MessageType::MessageType_TronGetAddress => 269,
-            MessageType::MessageType_TronAddress => 270,
-            MessageType::MessageType_TronSignTx => 271,
-            MessageType::MessageType_TronSignature => 272,
-            MessageType::MessageType_TronContractRequest => 273,
-            MessageType::MessageType_TronTransferContract => 274,
-            MessageType::MessageType_TronTriggerSmartContract => 275,
-            MessageType::MessageType_TronFreezeBalanceV2Contract => 276,
-            MessageType::MessageType_TronUnfreezeBalanceV2Contract => 277,
-            MessageType::MessageType_TronWithdrawUnfreeze => 278,
-            MessageType::MessageType_TronVoteWitnessContract => 279,
-            MessageType::MessageType_BenchmarkListNames => 280,
-            MessageType::MessageType_BenchmarkNames => 281,
-            MessageType::MessageType_BenchmarkRun => 282,
-            MessageType::MessageType_BenchmarkResult => 283,
-            MessageType::MessageType_TelemetryGet => 284,
-            MessageType::MessageType_Telemetry => 285,
+            MessageType::MessageType_TronGetAddress => 267,
+            MessageType::MessageType_TronAddress => 268,
+            MessageType::MessageType_TronSignTx => 269,
+            MessageType::MessageType_TronSignature => 270,
+            MessageType::MessageType_TronContractRequest => 271,
+            MessageType::MessageType_TronTransferContract => 272,
+            MessageType::MessageType_TronTriggerSmartContract => 273,
+            MessageType::MessageType_TronFreezeBalanceV2Contract => 274,
+            MessageType::MessageType_TronUnfreezeBalanceV2Contract => 275,
+            MessageType::MessageType_TronWithdrawUnfreeze => 276,
+            MessageType::MessageType_TronVoteWitnessContract => 277,
+            MessageType::MessageType_BenchmarkListNames => 278,
+            MessageType::MessageType_BenchmarkNames => 279,
+            MessageType::MessageType_BenchmarkRun => 280,
+            MessageType::MessageType_BenchmarkResult => 281,
+            MessageType::MessageType_TelemetryGet => 282,
+            MessageType::MessageType_Telemetry => 283,
+            MessageType::MessageType_KvGetAuthority => 284,
+            MessageType::MessageType_KvAuthority => 285,
         };
         Self::enum_descriptor().value_by_index(index)
     }
@@ -2102,33 +2102,33 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x10\x1a\x08\x80\xa6\x1d\x01\x98\xb5\x18\x01\x12/\n\x20MessageType_Evolu\
     IndexManagement\x10\xba\x10\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x127\
     \n(MessageType_EvoluIndexManagementResponse\x10\xbb\x10\x1a\x08\x80\xa6\
-    \x1d\x01\x98\xb5\x18\x01\x12)\n\x1aMessageType_KvGetAuthority\x10\xbe\
-    \x10\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12&\n\x17MessageType_KvAut\
-    hority\x10\xbf\x10\x1a\x08\x80\xa6\x1d\x01\x98\xb5\x18\x01\x12%\n\x1aMes\
-    sageType_TronGetAddress\x10\x98\x11\x1a\x04\x90\xb5\x18\x01\x12\"\n\x17M\
-    essageType_TronAddress\x10\x99\x11\x1a\x04\x98\xb5\x18\x01\x12!\n\x16Mes\
-    sageType_TronSignTx\x10\x9a\x11\x1a\x04\x90\xb5\x18\x01\x12$\n\x19Messag\
-    eType_TronSignature\x10\x9b\x11\x1a\x04\x98\xb5\x18\x01\x12*\n\x1fMessag\
-    eType_TronContractRequest\x10\x9c\x11\x1a\x04\x98\xb5\x18\x01\x12+\n\x20\
-    MessageType_TronTransferContract\x10\x9d\x11\x1a\x04\x90\xb5\x18\x01\x12\
-    /\n$MessageType_TronTriggerSmartContract\x10\x9e\x11\x1a\x04\x90\xb5\x18\
-    \x01\x122\n'MessageType_TronFreezeBalanceV2Contract\x10\x9f\x11\x1a\x04\
-    \x90\xb5\x18\x01\x124\n)MessageType_TronUnfreezeBalanceV2Contract\x10\
-    \xa0\x11\x1a\x04\x90\xb5\x18\x01\x12+\n\x20MessageType_TronWithdrawUnfre\
-    eze\x10\xa1\x11\x1a\x04\x90\xb5\x18\x01\x12.\n#MessageType_TronVoteWitne\
-    ssContract\x10\xa2\x11\x1a\x04\x90\xb5\x18\x01\x12)\n\x1eMessageType_Ben\
-    chmarkListNames\x10\x8cG\x1a\x04\x80\xa6\x1d\x01\x12%\n\x1aMessageType_B\
-    enchmarkNames\x10\x8dG\x1a\x04\x80\xa6\x1d\x01\x12#\n\x18MessageType_Ben\
-    chmarkRun\x10\x8eG\x1a\x04\x80\xa6\x1d\x01\x12&\n\x1bMessageType_Benchma\
-    rkResult\x10\x8fG\x1a\x04\x80\xa6\x1d\x01\x12'\n\x18MessageType_Telemetr\
-    yGet\x10\xcc\x08\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12$\n\x15Messa\
-    geType_Telemetry\x10\xcd\x08\x1a\x08\x80\xa6\x1d\x01\x98\xb5\x18\x01\x1a\
-    \x08\xc8\xf3\x18\x01\xd0\xf3\x18\x01\"\x04\x08Z\x10\\\"\x04\x08G\x10J\"\
-    \x04\x08r\x10z\"\x05\x08{\x10\x95\x01\"\x06\x08\xdb\x01\x10\xdb\x01\"\
-    \x06\x08\xe0\x01\x10\xe0\x01\"\x06\x08\xac\x02\x10\xb0\x02\"\x06\x08\xb5\
-    \x02\x10\xb8\x02\"\x06\x08\xbc\x05\x10\xc5\x05\"\x06\x08\xe9\x07\x10\xf7\
-    \x07\"\x06\x08\xfa\x07\x10\xcb\x08B8\n#com.satoshilabs.trezor.lib.protob\
-    ufB\rTrezorMessage\x80\xa6\x1d\x01\
+    \x1d\x01\x98\xb5\x18\x01\x12%\n\x1aMessageType_TronGetAddress\x10\x98\
+    \x11\x1a\x04\x90\xb5\x18\x01\x12\"\n\x17MessageType_TronAddress\x10\x99\
+    \x11\x1a\x04\x98\xb5\x18\x01\x12!\n\x16MessageType_TronSignTx\x10\x9a\
+    \x11\x1a\x04\x90\xb5\x18\x01\x12$\n\x19MessageType_TronSignature\x10\x9b\
+    \x11\x1a\x04\x98\xb5\x18\x01\x12*\n\x1fMessageType_TronContractRequest\
+    \x10\x9c\x11\x1a\x04\x98\xb5\x18\x01\x12+\n\x20MessageType_TronTransferC\
+    ontract\x10\x9d\x11\x1a\x04\x90\xb5\x18\x01\x12/\n$MessageType_TronTrigg\
+    erSmartContract\x10\x9e\x11\x1a\x04\x90\xb5\x18\x01\x122\n'MessageType_T\
+    ronFreezeBalanceV2Contract\x10\x9f\x11\x1a\x04\x90\xb5\x18\x01\x124\n)Me\
+    ssageType_TronUnfreezeBalanceV2Contract\x10\xa0\x11\x1a\x04\x90\xb5\x18\
+    \x01\x12+\n\x20MessageType_TronWithdrawUnfreeze\x10\xa1\x11\x1a\x04\x90\
+    \xb5\x18\x01\x12.\n#MessageType_TronVoteWitnessContract\x10\xa2\x11\x1a\
+    \x04\x90\xb5\x18\x01\x12)\n\x1eMessageType_BenchmarkListNames\x10\x8cG\
+    \x1a\x04\x80\xa6\x1d\x01\x12%\n\x1aMessageType_BenchmarkNames\x10\x8dG\
+    \x1a\x04\x80\xa6\x1d\x01\x12#\n\x18MessageType_BenchmarkRun\x10\x8eG\x1a\
+    \x04\x80\xa6\x1d\x01\x12&\n\x1bMessageType_BenchmarkResult\x10\x8fG\x1a\
+    \x04\x80\xa6\x1d\x01\x12'\n\x18MessageType_TelemetryGet\x10\xcc\x08\x1a\
+    \x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12$\n\x15MessageType_Telemetry\x10\
+    \xcd\x08\x1a\x08\x80\xa6\x1d\x01\x98\xb5\x18\x01\x12)\n\x1aMessageType_K\
+    vGetAuthority\x10\xbe\x10\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12&\n\
+    \x17MessageType_KvAuthority\x10\xbf\x10\x1a\x08\x80\xa6\x1d\x01\x98\xb5\
+    \x18\x01\x1a\x08\xc8\xf3\x18\x01\xd0\xf3\x18\x01\"\x04\x08Z\x10\\\"\x04\
+    \x08G\x10J\"\x04\x08r\x10z\"\x05\x08{\x10\x95\x01\"\x06\x08\xdb\x01\x10\
+    \xdb\x01\"\x06\x08\xe0\x01\x10\xe0\x01\"\x06\x08\xac\x02\x10\xb0\x02\"\
+    \x06\x08\xb5\x02\x10\xb8\x02\"\x06\x08\xbc\x05\x10\xc5\x05\"\x06\x08\xe9\
+    \x07\x10\xf7\x07\"\x06\x08\xfa\x07\x10\xcb\x08B8\n#com.satoshilabs.trezo\
+    r.lib.protobufB\rTrezorMessage\x80\xa6\x1d\x01\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file

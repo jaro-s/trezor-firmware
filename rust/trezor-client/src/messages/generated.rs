@@ -106,6 +106,8 @@ trezor_message_impl! {
     BenchmarkResult => MessageType_BenchmarkResult,
     TelemetryGet => MessageType_TelemetryGet,
     Telemetry => MessageType_Telemetry,
+    KvGetAuthority => MessageType_KvGetAuthority,
+    KvAuthority => MessageType_KvAuthority,
 }
 
 #[cfg(feature = "bitcoin")]
@@ -206,8 +208,6 @@ trezor_message_impl! {
     EvoluDelegatedIdentityKey => MessageType_EvoluDelegatedIdentityKey,
     EvoluIndexManagement => MessageType_EvoluIndexManagement,
     EvoluIndexManagementResponse => MessageType_EvoluIndexManagementResponse,
-    KvGetAuthority => MessageType_KvGetAuthority,
-    KvAuthority => MessageType_KvAuthority,
 }
 
 #[cfg(feature = "monero")]

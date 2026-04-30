@@ -747,8 +747,6 @@ class MessageType(IntEnum):
     EvoluDelegatedIdentityKey = 2105
     EvoluIndexManagement = 2106
     EvoluIndexManagementResponse = 2107
-    KvGetAuthority = 2110
-    KvAuthority = 2111
     TronGetAddress = 2200
     TronAddress = 2201
     TronSignTx = 2202
@@ -766,6 +764,8 @@ class MessageType(IntEnum):
     BenchmarkResult = 9103
     TelemetryGet = 1100
     Telemetry = 1101
+    KvGetAuthority = 2110
+    KvAuthority = 2111
 
 
 class BenchmarkListNames(protobuf.MessageType):

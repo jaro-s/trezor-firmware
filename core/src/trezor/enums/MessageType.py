@@ -94,14 +94,14 @@ EvoluGetDelegatedIdentityKey = 2104
 EvoluDelegatedIdentityKey = 2105
 EvoluIndexManagement = 2106
 EvoluIndexManagementResponse = 2107
-KvGetAuthority = 2110
-KvAuthority = 2111
 BenchmarkListNames = 9100
 BenchmarkNames = 9101
 BenchmarkRun = 9102
 BenchmarkResult = 9103
 TelemetryGet = 1100
 Telemetry = 1101
+KvGetAuthority = 2110
+KvAuthority = 2111
 if __debug__:
     DebugLinkDecision = 100
     DebugLinkGetState = 101
