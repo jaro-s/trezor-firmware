@@ -43,6 +43,117 @@ DERIVED_RECORD_ID_VECTORS = (
     },
 )
 
+KV_AUTH_MAX_KEY = "a" * 256
+
+KV_AUTH_DERIVATION_VECTORS = (
+    {
+        "seed_hex": "000102030405060708090a0b0c0d0e0f",
+        "sign_secret_key_hex": (
+            "6e9fea9bd0b87f05b8a0092f649812b1"
+            "cc0e5acfd7968d9b23fb015b7c65db27"
+        ),
+        "sign_public_key_hex": (
+            "04576283eae1bc0cfd5ce64b845525e503554c5937f0d68a2099a1e15b445af6ff"
+            "9fc0b75ffd289795a94be63b5e1f421efd507396e2e4ad15d08d7084eefc4712"
+        ),
+        "index_key_hex": (
+            "85a1a95c237ee26bcf9181e28f1b4b52"
+            "a27b8439579f7b7afaf5648f0499a4a7"
+        ),
+        "record_id_vectors": (
+            {
+                "key": "alice",
+                "record_id_hex": (
+                    "df83778de4d7d3f9c534c6979c037509"
+                    "5d79f4dd7fda4db482bf42886626831a"
+                ),
+            },
+            {
+                "key": "bob",
+                "record_id_hex": (
+                    "1242192d5977b1e3214f36e7383bb012"
+                    "12b73cfb8ad66c082bcd78e2b530d4e4"
+                ),
+            },
+            {
+                "key": "řeřicha",
+                "record_id_hex": (
+                    "011fe7a099e86918d8ee29cfc3e253fd"
+                    "4e13310b6d0d5f59546c9c0b7394c9b2"
+                ),
+            },
+            {
+                "key": KV_AUTH_MAX_KEY,
+                "record_id_hex": (
+                    "70421847e5253c6c6dcfe37368e8d1d6"
+                    "f39adc657dfa297a079575013220c7a4"
+                ),
+            },
+        ),
+    },
+    {
+        "seed_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "sign_secret_key_hex": (
+            "a73a0919fde2d5814d9877b1d0fabb55"
+            "6240a04f6da77c9d1d182b08c8fc9a76"
+        ),
+        "sign_public_key_hex": (
+            "04b06fef4083a001bcdf98eccd9e327f7e39b0d30608578ab576b326fde8e3be69"
+            "eb59ace72dcbac00c5ed304aa3bb8dd63e3d5c675aff9b722f929f4be04052f8"
+        ),
+        "index_key_hex": (
+            "39e06994bbbc786aa5148f9455e43c18"
+            "18607b6984188dc6af99984f3b34804d"
+        ),
+        "record_id_vectors": (
+            {
+                "key": "alice",
+                "record_id_hex": (
+                    "ce139ad0fc18e193558cfeea78037bdb"
+                    "27e64effc0a7a6fda6bdb7a693e471f3"
+                ),
+            },
+            {
+                "key": "bob",
+                "record_id_hex": (
+                    "6d0dc2275364751bd884c93125fb3069"
+                    "c5544a3eb88e7422cb65487dbdcdbfa5"
+                ),
+            },
+            {
+                "key": "řeřicha",
+                "record_id_hex": (
+                    "b26e837586748401651010b6dbb67e4c"
+                    "f6f91ebfd0af6ab5e2153e28e676488a"
+                ),
+            },
+            {
+                "key": KV_AUTH_MAX_KEY,
+                "record_id_hex": (
+                    "14c8bbf0ef88acd52ae19fb7dd691031"
+                    "6854acc57d12002d3e35df980c454c0b"
+                ),
+            },
+        ),
+    },
+    {
+        "seed_hex": SEED_HEX,
+        "sign_secret_key_hex": DERIVED_SIGN_SECRET_KEY_HEX,
+        "sign_public_key_hex": DERIVED_SIGN_PUBLIC_KEY_HEX,
+        "index_key_hex": DERIVED_INDEX_KEY_HEX,
+        "record_id_vectors": DERIVED_RECORD_ID_VECTORS
+        + (
+            {
+                "key": KV_AUTH_MAX_KEY,
+                "record_id_hex": (
+                    "8aabcbed1136e6f676e97e0b322cf535"
+                    "699d124b813f335b6719cc890a78ceb4"
+                ),
+            },
+        ),
+    },
+)
+
 RECORD_VECTORS = (
     {
         "key": "alice",
