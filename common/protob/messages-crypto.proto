@@ -101,6 +101,36 @@ message PaymentNotification {
     optional common.PaymentRequest payment_req = 1;  // SLIP-24 payment request
 }
 
+enum KvOperationType {
+    KvOperation_Add = 1;
+    KvOperation_Update = 2;
+    KvOperation_Delete = 3;
+}
+
+/**
+ * Structure representing a signed KV state head
+ * @embed
+ */
+message KvHead {
+    required uint32 schema_version = 1;
+    required uint64 seq = 2;
+    required bytes records_root = 3;
+    optional bytes prev_head_hash = 4;
+    required bytes signature = 5;
+}
+
+/**
+ * Structure representing one sparse Merkle proof
+ * @embed
+ */
+message KvSparseMerkleProof {
+    required bytes leaf_key = 1;           // blinded record_id
+    optional bytes leaf_hash = 2;          // leaf node hash for inclusion proofs
+    repeated bytes sibling_hashes = 3;     // ordered leaf-to-root; or only non-default siblings if sibling_bitmap is set
+    required bool exists = 4;              // true=inclusion, false=absence
+    optional bytes sibling_bitmap = 5;     // 32-byte MSB-first bitmap; 1=use next sibling_hash, 0=use default empty hash
+}
+
 /**
  * Request: Ask device for KV authority public key
  * @start
@@ -134,4 +164,28 @@ message KvGetRecordId {
  */
 message KvRecordId {
     required bytes record_id = 1;
+}
+
+/**
+ * Request: Ask device to verify a KV transition and sign the new head
+ * @start
+ * @next KvSignedTransition
+ * @next Failure
+ */
+message KvSignTransition {
+    required KvOperationType operation = 1;
+    required string key = 2;
+    required KvHead old_head = 3;
+    optional string old_value = 4;
+    optional string new_value = 5;
+    required KvSparseMerkleProof proof = 6;
+    required bytes proposed_new_root = 7;
+}
+
+/**
+ * Response: Device provides signed new head
+ * @end
+ */
+message KvSignedTransition {
+    required KvHead new_head = 1;
 }

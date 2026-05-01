@@ -104,6 +104,8 @@ KvGetAuthority = 2110
 KvAuthority = 2111
 KvGetRecordId = 2112
 KvRecordId = 2113
+KvSignTransition = 2114
+KvSignedTransition = 2115
 if __debug__:
     DebugLinkDecision = 100
     DebugLinkGetState = 101
