@@ -6,6 +6,7 @@ from ubinascii import unhexlify
 from kv_reference import proof_for, root_for, vector_records
 from kv_vectors import (
     ABSENT_KEY,
+    COMPACT_PROOF_VECTORS,
     EMPTY_255_HEX,
     EMPTY_256_HEX,
     EMPTY_ROOT_HEX,
@@ -66,6 +67,26 @@ class TestKvSmt(unittest.TestCase):
             ),
             unhexlify(ROOT_AFTER_1_HEX),
         )
+
+    def test_compact_proof_golden_vectors(self):
+        for item in COMPACT_PROOF_VECTORS:
+            leaf_hash = (
+                None
+                if item["leaf_hash_hex"] is None
+                else unhexlify(item["leaf_hash_hex"])
+            )
+            sibling_hashes = [unhexlify(value) for value in item["sibling_hashes_hex"]]
+            self.assertEqual(
+                kv_smt.compute_root_from_proof(
+                    unhexlify(item["leaf_key_hex"]),
+                    item["exists"],
+                    leaf_hash,
+                    sibling_hashes,
+                    unhexlify(item["sibling_bitmap_hex"]),
+                ),
+                unhexlify(item["root_hex"]),
+                item["name"],
+            )
 
     def test_compact_proof_rejects_extra_siblings(self):
         record = RECORD_VECTORS[0]

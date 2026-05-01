@@ -210,3 +210,55 @@ GENESIS_HEAD_HASH_HEX = "f13718f9055c42752f850c44424275c5ae217d9b7443c225594bf7e
 FIRST_SIGNED_HEAD_HASH_HEX = "6e6ae6cc666a3f7ad886656a70de3969f728142aea690ef699904477ac120cff"
 
 ABSENT_KEY = "carol"
+ABSENT_RECORD_ID_HEX = (
+    "03fe2d9d5da47ba0ba878438da7ee78e"
+    "435b2f5e1932de7fbfedd0797f987559"
+)
+
+COMPACT_PROOF_VECTORS = (
+    {
+        "name": "inclusion-bob-root-after-3",
+        "root_hex": ROOT_AFTER_3_HEX,
+        "leaf_key_hex": RECORD_VECTORS[1]["record_id_hex"],
+        "leaf_hash_hex": (
+            "4058457d79e8cb538070421423050200"
+            "9090c01827d38bd09457c35a24c1b896"
+        ),
+        "exists": True,
+        "sibling_bitmap_hex": (
+            "00000000000000000000000000000000"
+            "00000000000000000000000000000005"
+        ),
+        "sibling_hashes_hex": (
+            (
+                "5b4d9fe1c46f576bbc0fc3d882955b05"
+                "c1b224b934d328c6a4c96a4d0ccb260c"
+            ),
+            (
+                "ec3b269fa0c9bf4480da426645b90dbd"
+                "e027df0eb2e1c88c9d344f9853b1b5a3"
+            ),
+        ),
+    },
+    {
+        "name": "absence-carol-root-after-3",
+        "root_hex": ROOT_AFTER_3_HEX,
+        "leaf_key_hex": ABSENT_RECORD_ID_HEX,
+        "leaf_hash_hex": None,
+        "exists": False,
+        "sibling_bitmap_hex": (
+            "00000000000000000000000000000000"
+            "00000000000000000000000000000005"
+        ),
+        "sibling_hashes_hex": (
+            (
+                "db7c150c9c09097613631c173bdb44f0"
+                "5cde19aee22661f1324a92bb73268ccd"
+            ),
+            (
+                "1c410a22f7a2be9a97367bb2ac95f731"
+                "8edb3b08ce9170af0879ddc95859cf0d"
+            ),
+        ),
+    },
+)
