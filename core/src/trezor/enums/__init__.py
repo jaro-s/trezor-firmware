@@ -171,6 +171,11 @@ if TYPE_CHECKING:
         BYRON_WITNESS = 0
         SHELLEY_WITNESS = 1
 
+    class KvOperationType(IntEnum):
+        Add = 1
+        Update = 2
+        Delete = 3
+
     class BackupType(IntEnum):
         Bip39 = 0
         Slip39_Basic = 1
@@ -688,6 +693,8 @@ if TYPE_CHECKING:
         EvoluDelegatedIdentityKey = 2105
         EvoluIndexManagement = 2106
         EvoluIndexManagementResponse = 2107
+        KvSignTransition = 2114
+        KvSignedTransition = 2115
         TronGetAddress = 2200
         TronAddress = 2201
         TronSignTx = 2202

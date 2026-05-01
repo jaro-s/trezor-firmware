@@ -109,6 +109,35 @@ class TestKv(unittest.TestCase):
             )
         )
 
+    def test_validate_first_add_transition_with_compact_proof(self):
+        sign_secret_key = unhexlify(SIGN_SECRET_KEY_HEX)
+        public_key = kv.public_key(sign_secret_key)
+        index_key = unhexlify(INDEX_KEY_HEX)
+        record = RECORD_VECTORS[0]
+        leaf_key = kv_serialize.record_id(index_key, record["key"])
+        new_head = kv.create_signed_transition(
+            sign_secret_key=sign_secret_key,
+            public_key=public_key,
+            index_key=index_key,
+            schema_version=kv.SCHEMA_VERSION,
+            operation=kv.OP_ADD,
+            old_head_seq=0,
+            old_head_root=unhexlify(EMPTY_ROOT_HEX),
+            old_head_prev_hash=b"",
+            old_head_signature=b"",
+            key=record["key"],
+            old_value=None,
+            new_value=record["value"],
+            proof_exists=False,
+            proof_leaf_key=leaf_key,
+            proof_leaf_hash=None,
+            proof_sibling_hashes=[],
+            proof_sibling_bitmap=b"\x00" * 32,
+            proposed_new_root=unhexlify(ROOT_AFTER_1_HEX),
+        )
+        self.assertEqual(new_head["seq"], 1)
+        self.assertEqual(new_head["records_root"], unhexlify(ROOT_AFTER_1_HEX))
+
     def test_validate_update_and_delete_transition(self):
         sign_secret_key = unhexlify(SIGN_SECRET_KEY_HEX)
         public_key = kv.public_key(sign_secret_key)

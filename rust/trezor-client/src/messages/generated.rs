@@ -210,6 +210,8 @@ trezor_message_impl! {
     EvoluDelegatedIdentityKey => MessageType_EvoluDelegatedIdentityKey,
     EvoluIndexManagement => MessageType_EvoluIndexManagement,
     EvoluIndexManagementResponse => MessageType_EvoluIndexManagementResponse,
+    KvSignTransition => MessageType_KvSignTransition,
+    KvSignedTransition => MessageType_KvSignedTransition,
 }
 
 #[cfg(feature = "monero")]
