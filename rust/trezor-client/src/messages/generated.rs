@@ -110,6 +110,8 @@ trezor_message_impl! {
     KvAuthority => MessageType_KvAuthority,
     KvGetRecordId => MessageType_KvGetRecordId,
     KvRecordId => MessageType_KvRecordId,
+    KvSignTransition => MessageType_KvSignTransition,
+    KvSignedTransition => MessageType_KvSignedTransition,
 }
 
 #[cfg(feature = "bitcoin")]

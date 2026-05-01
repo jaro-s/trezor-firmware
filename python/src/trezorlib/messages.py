@@ -193,6 +193,12 @@ class CardanoTxWitnessType(IntEnum):
     SHELLEY_WITNESS = 1
 
 
+class KvOperationType(IntEnum):
+    Add = 1
+    Update = 2
+    Delete = 3
+
+
 class BackupType(IntEnum):
     Bip39 = 0
     Slip39_Basic = 1
@@ -768,6 +774,8 @@ class MessageType(IntEnum):
     KvAuthority = 2111
     KvGetRecordId = 2112
     KvRecordId = 2113
+    KvSignTransition = 2114
+    KvSignedTransition = 2115
 
 
 class BenchmarkListNames(protobuf.MessageType):
@@ -3247,6 +3255,58 @@ class PaymentNotification(protobuf.MessageType):
         self.payment_req = payment_req
 
 
+class KvHead(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = None
+    FIELDS = {
+        1: protobuf.Field("schema_version", "uint32", repeated=False, required=True),
+        2: protobuf.Field("seq", "uint64", repeated=False, required=True),
+        3: protobuf.Field("records_root", "bytes", repeated=False, required=True),
+        4: protobuf.Field("prev_head_hash", "bytes", repeated=False, required=False, default=None),
+        5: protobuf.Field("signature", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        schema_version: "int",
+        seq: "int",
+        records_root: "bytes",
+        signature: "bytes",
+        prev_head_hash: Optional["bytes"] = None,
+    ) -> None:
+        self.schema_version = schema_version
+        self.seq = seq
+        self.records_root = records_root
+        self.signature = signature
+        self.prev_head_hash = prev_head_hash
+
+
+class KvSparseMerkleProof(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = None
+    FIELDS = {
+        1: protobuf.Field("leaf_key", "bytes", repeated=False, required=True),
+        2: protobuf.Field("leaf_hash", "bytes", repeated=False, required=False, default=None),
+        3: protobuf.Field("sibling_hashes", "bytes", repeated=True, required=False, default=None),
+        4: protobuf.Field("exists", "bool", repeated=False, required=True),
+        5: protobuf.Field("sibling_bitmap", "bytes", repeated=False, required=False, default=None),
+    }
+
+    def __init__(
+        self,
+        *,
+        leaf_key: "bytes",
+        exists: "bool",
+        sibling_hashes: Optional[Sequence["bytes"]] = None,
+        leaf_hash: Optional["bytes"] = None,
+        sibling_bitmap: Optional["bytes"] = None,
+    ) -> None:
+        self.sibling_hashes: Sequence["bytes"] = sibling_hashes if sibling_hashes is not None else []
+        self.leaf_key = leaf_key
+        self.exists = exists
+        self.leaf_hash = leaf_hash
+        self.sibling_bitmap = sibling_bitmap
+
+
 class KvGetAuthority(protobuf.MessageType):
     MESSAGE_WIRE_TYPE = 2110
 
@@ -3294,6 +3354,52 @@ class KvRecordId(protobuf.MessageType):
         record_id: "bytes",
     ) -> None:
         self.record_id = record_id
+
+
+class KvSignTransition(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 2114
+    FIELDS = {
+        1: protobuf.Field("operation", "KvOperationType", repeated=False, required=True),
+        2: protobuf.Field("key", "string", repeated=False, required=True),
+        3: protobuf.Field("old_head", "KvHead", repeated=False, required=True),
+        4: protobuf.Field("old_value", "string", repeated=False, required=False, default=None),
+        5: protobuf.Field("new_value", "string", repeated=False, required=False, default=None),
+        6: protobuf.Field("proof", "KvSparseMerkleProof", repeated=False, required=True),
+        7: protobuf.Field("proposed_new_root", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        operation: "KvOperationType",
+        key: "str",
+        old_head: "KvHead",
+        proof: "KvSparseMerkleProof",
+        proposed_new_root: "bytes",
+        old_value: Optional["str"] = None,
+        new_value: Optional["str"] = None,
+    ) -> None:
+        self.operation = operation
+        self.key = key
+        self.old_head = old_head
+        self.proof = proof
+        self.proposed_new_root = proposed_new_root
+        self.old_value = old_value
+        self.new_value = new_value
+
+
+class KvSignedTransition(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 2115
+    FIELDS = {
+        1: protobuf.Field("new_head", "KvHead", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        new_head: "KvHead",
+    ) -> None:
+        self.new_head = new_head
 
 
 class Initialize(protobuf.MessageType):

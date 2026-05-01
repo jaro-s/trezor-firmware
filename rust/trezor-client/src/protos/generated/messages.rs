@@ -603,6 +603,10 @@ pub enum MessageType {
     MessageType_KvGetRecordId = 2112,
     // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_KvRecordId)
     MessageType_KvRecordId = 2113,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_KvSignTransition)
+    MessageType_KvSignTransition = 2114,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_KvSignedTransition)
+    MessageType_KvSignedTransition = 2115,
 }
 
 impl ::protobuf::Enum for MessageType {
@@ -902,6 +906,8 @@ impl ::protobuf::Enum for MessageType {
             2111 => ::std::option::Option::Some(MessageType::MessageType_KvAuthority),
             2112 => ::std::option::Option::Some(MessageType::MessageType_KvGetRecordId),
             2113 => ::std::option::Option::Some(MessageType::MessageType_KvRecordId),
+            2114 => ::std::option::Option::Some(MessageType::MessageType_KvSignTransition),
+            2115 => ::std::option::Option::Some(MessageType::MessageType_KvSignedTransition),
             _ => ::std::option::Option::None
         }
     }
@@ -1196,6 +1202,8 @@ impl ::protobuf::Enum for MessageType {
             "MessageType_KvAuthority" => ::std::option::Option::Some(MessageType::MessageType_KvAuthority),
             "MessageType_KvGetRecordId" => ::std::option::Option::Some(MessageType::MessageType_KvGetRecordId),
             "MessageType_KvRecordId" => ::std::option::Option::Some(MessageType::MessageType_KvRecordId),
+            "MessageType_KvSignTransition" => ::std::option::Option::Some(MessageType::MessageType_KvSignTransition),
+            "MessageType_KvSignedTransition" => ::std::option::Option::Some(MessageType::MessageType_KvSignedTransition),
             _ => ::std::option::Option::None
         }
     }
@@ -1489,6 +1497,8 @@ impl ::protobuf::Enum for MessageType {
         MessageType::MessageType_KvAuthority,
         MessageType::MessageType_KvGetRecordId,
         MessageType::MessageType_KvRecordId,
+        MessageType::MessageType_KvSignTransition,
+        MessageType::MessageType_KvSignedTransition,
     ];
 }
 
@@ -1788,6 +1798,8 @@ impl ::protobuf::EnumFull for MessageType {
             MessageType::MessageType_KvAuthority => 285,
             MessageType::MessageType_KvGetRecordId => 286,
             MessageType::MessageType_KvRecordId => 287,
+            MessageType::MessageType_KvSignTransition => 288,
+            MessageType::MessageType_KvSignedTransition => 289,
         };
         Self::enum_descriptor().value_by_index(index)
     }
@@ -1806,7 +1818,7 @@ impl MessageType {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x0emessages.proto\x12\x12hw.trezor.messages\x1a\roptions.proto*\x82e\
+    \n\x0emessages.proto\x12\x12hw.trezor.messages\x1a\roptions.proto*\xdee\
     \n\x0bMessageType\x12(\n\x16MessageType_Initialize\x10\0\x1a\x0c\xb0\xb5\
     \x18\x01\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12\x1e\n\x10MessageType_Ping\
     \x10\x01\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12%\n\x13MessageType_S\
@@ -2137,13 +2149,15 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x17MessageType_KvAuthority\x10\xbf\x10\x1a\x08\x80\xa6\x1d\x01\x98\xb5\
     \x18\x01\x12(\n\x19MessageType_KvGetRecordId\x10\xc0\x10\x1a\x08\x80\xa6\
     \x1d\x01\x90\xb5\x18\x01\x12%\n\x16MessageType_KvRecordId\x10\xc1\x10\
-    \x1a\x08\x80\xa6\x1d\x01\x98\xb5\x18\x01\x1a\x08\xc8\xf3\x18\x01\xd0\xf3\
-    \x18\x01\"\x04\x08Z\x10\\\"\x04\x08G\x10J\"\x04\x08r\x10z\"\x05\x08{\x10\
-    \x95\x01\"\x06\x08\xdb\x01\x10\xdb\x01\"\x06\x08\xe0\x01\x10\xe0\x01\"\
-    \x06\x08\xac\x02\x10\xb0\x02\"\x06\x08\xb5\x02\x10\xb8\x02\"\x06\x08\xbc\
-    \x05\x10\xc5\x05\"\x06\x08\xe9\x07\x10\xf7\x07\"\x06\x08\xfa\x07\x10\xcb\
-    \x08B8\n#com.satoshilabs.trezor.lib.protobufB\rTrezorMessage\x80\xa6\x1d\
-    \x01\
+    \x1a\x08\x80\xa6\x1d\x01\x98\xb5\x18\x01\x12+\n\x1cMessageType_KvSignTra\
+    nsition\x10\xc2\x10\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12-\n\x1eMe\
+    ssageType_KvSignedTransition\x10\xc3\x10\x1a\x08\x80\xa6\x1d\x01\x98\xb5\
+    \x18\x01\x1a\x08\xc8\xf3\x18\x01\xd0\xf3\x18\x01\"\x04\x08Z\x10\\\"\x04\
+    \x08G\x10J\"\x04\x08r\x10z\"\x05\x08{\x10\x95\x01\"\x06\x08\xdb\x01\x10\
+    \xdb\x01\"\x06\x08\xe0\x01\x10\xe0\x01\"\x06\x08\xac\x02\x10\xb0\x02\"\
+    \x06\x08\xb5\x02\x10\xb8\x02\"\x06\x08\xbc\x05\x10\xc5\x05\"\x06\x08\xe9\
+    \x07\x10\xf7\x07\"\x06\x08\xfa\x07\x10\xcb\x08B8\n#com.satoshilabs.trezo\
+    r.lib.protobufB\rTrezorMessage\x80\xa6\x1d\x01\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file

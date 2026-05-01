@@ -2150,6 +2150,685 @@ impl ::protobuf::reflect::ProtobufValue for PaymentNotification {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
+// @@protoc_insertion_point(message:hw.trezor.messages.crypto.KvHead)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct KvHead {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvHead.schema_version)
+    pub schema_version: ::std::option::Option<u32>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvHead.seq)
+    pub seq: ::std::option::Option<u64>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvHead.records_root)
+    pub records_root: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvHead.prev_head_hash)
+    pub prev_head_hash: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvHead.signature)
+    pub signature: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.crypto.KvHead.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a KvHead {
+    fn default() -> &'a KvHead {
+        <KvHead as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl KvHead {
+    pub fn new() -> KvHead {
+        ::std::default::Default::default()
+    }
+
+    // required uint32 schema_version = 1;
+
+    pub fn schema_version(&self) -> u32 {
+        self.schema_version.unwrap_or(0)
+    }
+
+    pub fn clear_schema_version(&mut self) {
+        self.schema_version = ::std::option::Option::None;
+    }
+
+    pub fn has_schema_version(&self) -> bool {
+        self.schema_version.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_schema_version(&mut self, v: u32) {
+        self.schema_version = ::std::option::Option::Some(v);
+    }
+
+    // required uint64 seq = 2;
+
+    pub fn seq(&self) -> u64 {
+        self.seq.unwrap_or(0)
+    }
+
+    pub fn clear_seq(&mut self) {
+        self.seq = ::std::option::Option::None;
+    }
+
+    pub fn has_seq(&self) -> bool {
+        self.seq.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_seq(&mut self, v: u64) {
+        self.seq = ::std::option::Option::Some(v);
+    }
+
+    // required bytes records_root = 3;
+
+    pub fn records_root(&self) -> &[u8] {
+        match self.records_root.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_records_root(&mut self) {
+        self.records_root = ::std::option::Option::None;
+    }
+
+    pub fn has_records_root(&self) -> bool {
+        self.records_root.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_records_root(&mut self, v: ::std::vec::Vec<u8>) {
+        self.records_root = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_records_root(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.records_root.is_none() {
+            self.records_root = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.records_root.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_records_root(&mut self) -> ::std::vec::Vec<u8> {
+        self.records_root.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    // optional bytes prev_head_hash = 4;
+
+    pub fn prev_head_hash(&self) -> &[u8] {
+        match self.prev_head_hash.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_prev_head_hash(&mut self) {
+        self.prev_head_hash = ::std::option::Option::None;
+    }
+
+    pub fn has_prev_head_hash(&self) -> bool {
+        self.prev_head_hash.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_prev_head_hash(&mut self, v: ::std::vec::Vec<u8>) {
+        self.prev_head_hash = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_prev_head_hash(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.prev_head_hash.is_none() {
+            self.prev_head_hash = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.prev_head_hash.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_prev_head_hash(&mut self) -> ::std::vec::Vec<u8> {
+        self.prev_head_hash.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    // required bytes signature = 5;
+
+    pub fn signature(&self) -> &[u8] {
+        match self.signature.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_signature(&mut self) {
+        self.signature = ::std::option::Option::None;
+    }
+
+    pub fn has_signature(&self) -> bool {
+        self.signature.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_signature(&mut self, v: ::std::vec::Vec<u8>) {
+        self.signature = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_signature(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.signature.is_none() {
+            self.signature = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.signature.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_signature(&mut self) -> ::std::vec::Vec<u8> {
+        self.signature.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(5);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "schema_version",
+            |m: &KvHead| { &m.schema_version },
+            |m: &mut KvHead| { &mut m.schema_version },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "seq",
+            |m: &KvHead| { &m.seq },
+            |m: &mut KvHead| { &mut m.seq },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "records_root",
+            |m: &KvHead| { &m.records_root },
+            |m: &mut KvHead| { &mut m.records_root },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "prev_head_hash",
+            |m: &KvHead| { &m.prev_head_hash },
+            |m: &mut KvHead| { &mut m.prev_head_hash },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "signature",
+            |m: &KvHead| { &m.signature },
+            |m: &mut KvHead| { &mut m.signature },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<KvHead>(
+            "KvHead",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for KvHead {
+    const NAME: &'static str = "KvHead";
+
+    fn is_initialized(&self) -> bool {
+        if self.schema_version.is_none() {
+            return false;
+        }
+        if self.seq.is_none() {
+            return false;
+        }
+        if self.records_root.is_none() {
+            return false;
+        }
+        if self.signature.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.schema_version = ::std::option::Option::Some(is.read_uint32()?);
+                },
+                16 => {
+                    self.seq = ::std::option::Option::Some(is.read_uint64()?);
+                },
+                26 => {
+                    self.records_root = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                34 => {
+                    self.prev_head_hash = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                42 => {
+                    self.signature = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.schema_version {
+            my_size += ::protobuf::rt::uint32_size(1, v);
+        }
+        if let Some(v) = self.seq {
+            my_size += ::protobuf::rt::uint64_size(2, v);
+        }
+        if let Some(v) = self.records_root.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(3, &v);
+        }
+        if let Some(v) = self.prev_head_hash.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(4, &v);
+        }
+        if let Some(v) = self.signature.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(5, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.schema_version {
+            os.write_uint32(1, v)?;
+        }
+        if let Some(v) = self.seq {
+            os.write_uint64(2, v)?;
+        }
+        if let Some(v) = self.records_root.as_ref() {
+            os.write_bytes(3, v)?;
+        }
+        if let Some(v) = self.prev_head_hash.as_ref() {
+            os.write_bytes(4, v)?;
+        }
+        if let Some(v) = self.signature.as_ref() {
+            os.write_bytes(5, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> KvHead {
+        KvHead::new()
+    }
+
+    fn clear(&mut self) {
+        self.schema_version = ::std::option::Option::None;
+        self.seq = ::std::option::Option::None;
+        self.records_root = ::std::option::Option::None;
+        self.prev_head_hash = ::std::option::Option::None;
+        self.signature = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static KvHead {
+        static instance: KvHead = KvHead {
+            schema_version: ::std::option::Option::None,
+            seq: ::std::option::Option::None,
+            records_root: ::std::option::Option::None,
+            prev_head_hash: ::std::option::Option::None,
+            signature: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for KvHead {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("KvHead").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for KvHead {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for KvHead {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hw.trezor.messages.crypto.KvSparseMerkleProof)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct KvSparseMerkleProof {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSparseMerkleProof.leaf_key)
+    pub leaf_key: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSparseMerkleProof.leaf_hash)
+    pub leaf_hash: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSparseMerkleProof.sibling_hashes)
+    pub sibling_hashes: ::std::vec::Vec<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSparseMerkleProof.exists)
+    pub exists: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSparseMerkleProof.sibling_bitmap)
+    pub sibling_bitmap: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.crypto.KvSparseMerkleProof.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a KvSparseMerkleProof {
+    fn default() -> &'a KvSparseMerkleProof {
+        <KvSparseMerkleProof as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl KvSparseMerkleProof {
+    pub fn new() -> KvSparseMerkleProof {
+        ::std::default::Default::default()
+    }
+
+    // required bytes leaf_key = 1;
+
+    pub fn leaf_key(&self) -> &[u8] {
+        match self.leaf_key.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_leaf_key(&mut self) {
+        self.leaf_key = ::std::option::Option::None;
+    }
+
+    pub fn has_leaf_key(&self) -> bool {
+        self.leaf_key.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_leaf_key(&mut self, v: ::std::vec::Vec<u8>) {
+        self.leaf_key = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_leaf_key(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.leaf_key.is_none() {
+            self.leaf_key = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.leaf_key.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_leaf_key(&mut self) -> ::std::vec::Vec<u8> {
+        self.leaf_key.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    // optional bytes leaf_hash = 2;
+
+    pub fn leaf_hash(&self) -> &[u8] {
+        match self.leaf_hash.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_leaf_hash(&mut self) {
+        self.leaf_hash = ::std::option::Option::None;
+    }
+
+    pub fn has_leaf_hash(&self) -> bool {
+        self.leaf_hash.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_leaf_hash(&mut self, v: ::std::vec::Vec<u8>) {
+        self.leaf_hash = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_leaf_hash(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.leaf_hash.is_none() {
+            self.leaf_hash = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.leaf_hash.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_leaf_hash(&mut self) -> ::std::vec::Vec<u8> {
+        self.leaf_hash.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    // required bool exists = 4;
+
+    pub fn exists(&self) -> bool {
+        self.exists.unwrap_or(false)
+    }
+
+    pub fn clear_exists(&mut self) {
+        self.exists = ::std::option::Option::None;
+    }
+
+    pub fn has_exists(&self) -> bool {
+        self.exists.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_exists(&mut self, v: bool) {
+        self.exists = ::std::option::Option::Some(v);
+    }
+
+    // optional bytes sibling_bitmap = 5;
+
+    pub fn sibling_bitmap(&self) -> &[u8] {
+        match self.sibling_bitmap.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_sibling_bitmap(&mut self) {
+        self.sibling_bitmap = ::std::option::Option::None;
+    }
+
+    pub fn has_sibling_bitmap(&self) -> bool {
+        self.sibling_bitmap.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_sibling_bitmap(&mut self, v: ::std::vec::Vec<u8>) {
+        self.sibling_bitmap = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_sibling_bitmap(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.sibling_bitmap.is_none() {
+            self.sibling_bitmap = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.sibling_bitmap.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_sibling_bitmap(&mut self) -> ::std::vec::Vec<u8> {
+        self.sibling_bitmap.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(5);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "leaf_key",
+            |m: &KvSparseMerkleProof| { &m.leaf_key },
+            |m: &mut KvSparseMerkleProof| { &mut m.leaf_key },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "leaf_hash",
+            |m: &KvSparseMerkleProof| { &m.leaf_hash },
+            |m: &mut KvSparseMerkleProof| { &mut m.leaf_hash },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+            "sibling_hashes",
+            |m: &KvSparseMerkleProof| { &m.sibling_hashes },
+            |m: &mut KvSparseMerkleProof| { &mut m.sibling_hashes },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "exists",
+            |m: &KvSparseMerkleProof| { &m.exists },
+            |m: &mut KvSparseMerkleProof| { &mut m.exists },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "sibling_bitmap",
+            |m: &KvSparseMerkleProof| { &m.sibling_bitmap },
+            |m: &mut KvSparseMerkleProof| { &mut m.sibling_bitmap },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<KvSparseMerkleProof>(
+            "KvSparseMerkleProof",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for KvSparseMerkleProof {
+    const NAME: &'static str = "KvSparseMerkleProof";
+
+    fn is_initialized(&self) -> bool {
+        if self.leaf_key.is_none() {
+            return false;
+        }
+        if self.exists.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.leaf_key = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                18 => {
+                    self.leaf_hash = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                26 => {
+                    self.sibling_hashes.push(is.read_bytes()?);
+                },
+                32 => {
+                    self.exists = ::std::option::Option::Some(is.read_bool()?);
+                },
+                42 => {
+                    self.sibling_bitmap = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.leaf_key.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(1, &v);
+        }
+        if let Some(v) = self.leaf_hash.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(2, &v);
+        }
+        for value in &self.sibling_hashes {
+            my_size += ::protobuf::rt::bytes_size(3, &value);
+        };
+        if let Some(v) = self.exists {
+            my_size += 1 + 1;
+        }
+        if let Some(v) = self.sibling_bitmap.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(5, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.leaf_key.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        if let Some(v) = self.leaf_hash.as_ref() {
+            os.write_bytes(2, v)?;
+        }
+        for v in &self.sibling_hashes {
+            os.write_bytes(3, &v)?;
+        };
+        if let Some(v) = self.exists {
+            os.write_bool(4, v)?;
+        }
+        if let Some(v) = self.sibling_bitmap.as_ref() {
+            os.write_bytes(5, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> KvSparseMerkleProof {
+        KvSparseMerkleProof::new()
+    }
+
+    fn clear(&mut self) {
+        self.leaf_key = ::std::option::Option::None;
+        self.leaf_hash = ::std::option::Option::None;
+        self.sibling_hashes.clear();
+        self.exists = ::std::option::Option::None;
+        self.sibling_bitmap = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static KvSparseMerkleProof {
+        static instance: KvSparseMerkleProof = KvSparseMerkleProof {
+            leaf_key: ::std::option::Option::None,
+            leaf_hash: ::std::option::Option::None,
+            sibling_hashes: ::std::vec::Vec::new(),
+            exists: ::std::option::Option::None,
+            sibling_bitmap: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for KvSparseMerkleProof {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("KvSparseMerkleProof").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for KvSparseMerkleProof {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for KvSparseMerkleProof {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
 // @@protoc_insertion_point(message:hw.trezor.messages.crypto.KvGetAuthority)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct KvGetAuthority {
@@ -2776,6 +3455,632 @@ impl ::protobuf::reflect::ProtobufValue for KvRecordId {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
+// @@protoc_insertion_point(message:hw.trezor.messages.crypto.KvSignTransition)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct KvSignTransition {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSignTransition.operation)
+    pub operation: ::std::option::Option<::protobuf::EnumOrUnknown<KvOperationType>>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSignTransition.key)
+    pub key: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSignTransition.old_head)
+    pub old_head: ::protobuf::MessageField<KvHead>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSignTransition.old_value)
+    pub old_value: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSignTransition.new_value)
+    pub new_value: ::std::option::Option<::std::string::String>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSignTransition.proof)
+    pub proof: ::protobuf::MessageField<KvSparseMerkleProof>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSignTransition.proposed_new_root)
+    pub proposed_new_root: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.crypto.KvSignTransition.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a KvSignTransition {
+    fn default() -> &'a KvSignTransition {
+        <KvSignTransition as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl KvSignTransition {
+    pub fn new() -> KvSignTransition {
+        ::std::default::Default::default()
+    }
+
+    // required .hw.trezor.messages.crypto.KvOperationType operation = 1;
+
+    pub fn operation(&self) -> KvOperationType {
+        match self.operation {
+            Some(e) => e.enum_value_or(KvOperationType::KvOperation_Add),
+            None => KvOperationType::KvOperation_Add,
+        }
+    }
+
+    pub fn clear_operation(&mut self) {
+        self.operation = ::std::option::Option::None;
+    }
+
+    pub fn has_operation(&self) -> bool {
+        self.operation.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_operation(&mut self, v: KvOperationType) {
+        self.operation = ::std::option::Option::Some(::protobuf::EnumOrUnknown::new(v));
+    }
+
+    // required string key = 2;
+
+    pub fn key(&self) -> &str {
+        match self.key.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_key(&mut self) {
+        self.key = ::std::option::Option::None;
+    }
+
+    pub fn has_key(&self) -> bool {
+        self.key.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_key(&mut self, v: ::std::string::String) {
+        self.key = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_key(&mut self) -> &mut ::std::string::String {
+        if self.key.is_none() {
+            self.key = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.key.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_key(&mut self) -> ::std::string::String {
+        self.key.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string old_value = 4;
+
+    pub fn old_value(&self) -> &str {
+        match self.old_value.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_old_value(&mut self) {
+        self.old_value = ::std::option::Option::None;
+    }
+
+    pub fn has_old_value(&self) -> bool {
+        self.old_value.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_old_value(&mut self, v: ::std::string::String) {
+        self.old_value = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_old_value(&mut self) -> &mut ::std::string::String {
+        if self.old_value.is_none() {
+            self.old_value = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.old_value.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_old_value(&mut self) -> ::std::string::String {
+        self.old_value.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // optional string new_value = 5;
+
+    pub fn new_value(&self) -> &str {
+        match self.new_value.as_ref() {
+            Some(v) => v,
+            None => "",
+        }
+    }
+
+    pub fn clear_new_value(&mut self) {
+        self.new_value = ::std::option::Option::None;
+    }
+
+    pub fn has_new_value(&self) -> bool {
+        self.new_value.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_new_value(&mut self, v: ::std::string::String) {
+        self.new_value = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_new_value(&mut self) -> &mut ::std::string::String {
+        if self.new_value.is_none() {
+            self.new_value = ::std::option::Option::Some(::std::string::String::new());
+        }
+        self.new_value.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_new_value(&mut self) -> ::std::string::String {
+        self.new_value.take().unwrap_or_else(|| ::std::string::String::new())
+    }
+
+    // required bytes proposed_new_root = 7;
+
+    pub fn proposed_new_root(&self) -> &[u8] {
+        match self.proposed_new_root.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_proposed_new_root(&mut self) {
+        self.proposed_new_root = ::std::option::Option::None;
+    }
+
+    pub fn has_proposed_new_root(&self) -> bool {
+        self.proposed_new_root.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_proposed_new_root(&mut self, v: ::std::vec::Vec<u8>) {
+        self.proposed_new_root = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_proposed_new_root(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.proposed_new_root.is_none() {
+            self.proposed_new_root = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.proposed_new_root.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_proposed_new_root(&mut self) -> ::std::vec::Vec<u8> {
+        self.proposed_new_root.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(7);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "operation",
+            |m: &KvSignTransition| { &m.operation },
+            |m: &mut KvSignTransition| { &mut m.operation },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "key",
+            |m: &KvSignTransition| { &m.key },
+            |m: &mut KvSignTransition| { &mut m.key },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, KvHead>(
+            "old_head",
+            |m: &KvSignTransition| { &m.old_head },
+            |m: &mut KvSignTransition| { &mut m.old_head },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "old_value",
+            |m: &KvSignTransition| { &m.old_value },
+            |m: &mut KvSignTransition| { &mut m.old_value },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "new_value",
+            |m: &KvSignTransition| { &m.new_value },
+            |m: &mut KvSignTransition| { &mut m.new_value },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, KvSparseMerkleProof>(
+            "proof",
+            |m: &KvSignTransition| { &m.proof },
+            |m: &mut KvSignTransition| { &mut m.proof },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "proposed_new_root",
+            |m: &KvSignTransition| { &m.proposed_new_root },
+            |m: &mut KvSignTransition| { &mut m.proposed_new_root },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<KvSignTransition>(
+            "KvSignTransition",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for KvSignTransition {
+    const NAME: &'static str = "KvSignTransition";
+
+    fn is_initialized(&self) -> bool {
+        if self.operation.is_none() {
+            return false;
+        }
+        if self.key.is_none() {
+            return false;
+        }
+        if self.old_head.is_none() {
+            return false;
+        }
+        if self.proof.is_none() {
+            return false;
+        }
+        if self.proposed_new_root.is_none() {
+            return false;
+        }
+        for v in &self.old_head {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        for v in &self.proof {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.operation = ::std::option::Option::Some(is.read_enum_or_unknown()?);
+                },
+                18 => {
+                    self.key = ::std::option::Option::Some(is.read_string()?);
+                },
+                26 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.old_head)?;
+                },
+                34 => {
+                    self.old_value = ::std::option::Option::Some(is.read_string()?);
+                },
+                42 => {
+                    self.new_value = ::std::option::Option::Some(is.read_string()?);
+                },
+                50 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.proof)?;
+                },
+                58 => {
+                    self.proposed_new_root = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.operation {
+            my_size += ::protobuf::rt::int32_size(1, v.value());
+        }
+        if let Some(v) = self.key.as_ref() {
+            my_size += ::protobuf::rt::string_size(2, &v);
+        }
+        if let Some(v) = self.old_head.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.old_value.as_ref() {
+            my_size += ::protobuf::rt::string_size(4, &v);
+        }
+        if let Some(v) = self.new_value.as_ref() {
+            my_size += ::protobuf::rt::string_size(5, &v);
+        }
+        if let Some(v) = self.proof.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.proposed_new_root.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(7, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.operation {
+            os.write_enum(1, ::protobuf::EnumOrUnknown::value(&v))?;
+        }
+        if let Some(v) = self.key.as_ref() {
+            os.write_string(2, v)?;
+        }
+        if let Some(v) = self.old_head.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
+        }
+        if let Some(v) = self.old_value.as_ref() {
+            os.write_string(4, v)?;
+        }
+        if let Some(v) = self.new_value.as_ref() {
+            os.write_string(5, v)?;
+        }
+        if let Some(v) = self.proof.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(6, v, os)?;
+        }
+        if let Some(v) = self.proposed_new_root.as_ref() {
+            os.write_bytes(7, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> KvSignTransition {
+        KvSignTransition::new()
+    }
+
+    fn clear(&mut self) {
+        self.operation = ::std::option::Option::None;
+        self.key = ::std::option::Option::None;
+        self.old_head.clear();
+        self.old_value = ::std::option::Option::None;
+        self.new_value = ::std::option::Option::None;
+        self.proof.clear();
+        self.proposed_new_root = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static KvSignTransition {
+        static instance: KvSignTransition = KvSignTransition {
+            operation: ::std::option::Option::None,
+            key: ::std::option::Option::None,
+            old_head: ::protobuf::MessageField::none(),
+            old_value: ::std::option::Option::None,
+            new_value: ::std::option::Option::None,
+            proof: ::protobuf::MessageField::none(),
+            proposed_new_root: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for KvSignTransition {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("KvSignTransition").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for KvSignTransition {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for KvSignTransition {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hw.trezor.messages.crypto.KvSignedTransition)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct KvSignedTransition {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.crypto.KvSignedTransition.new_head)
+    pub new_head: ::protobuf::MessageField<KvHead>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.crypto.KvSignedTransition.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a KvSignedTransition {
+    fn default() -> &'a KvSignedTransition {
+        <KvSignedTransition as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl KvSignedTransition {
+    pub fn new() -> KvSignedTransition {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, KvHead>(
+            "new_head",
+            |m: &KvSignedTransition| { &m.new_head },
+            |m: &mut KvSignedTransition| { &mut m.new_head },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<KvSignedTransition>(
+            "KvSignedTransition",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for KvSignedTransition {
+    const NAME: &'static str = "KvSignedTransition";
+
+    fn is_initialized(&self) -> bool {
+        if self.new_head.is_none() {
+            return false;
+        }
+        for v in &self.new_head {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.new_head)?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.new_head.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.new_head.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> KvSignedTransition {
+        KvSignedTransition::new()
+    }
+
+    fn clear(&mut self) {
+        self.new_head.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static KvSignedTransition {
+        static instance: KvSignedTransition = KvSignedTransition {
+            new_head: ::protobuf::MessageField::none(),
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for KvSignedTransition {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("KvSignedTransition").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for KvSignedTransition {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for KvSignedTransition {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:hw.trezor.messages.crypto.KvOperationType)
+pub enum KvOperationType {
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.crypto.KvOperationType.KvOperation_Add)
+    KvOperation_Add = 1,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.crypto.KvOperationType.KvOperation_Update)
+    KvOperation_Update = 2,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.crypto.KvOperationType.KvOperation_Delete)
+    KvOperation_Delete = 3,
+}
+
+impl ::protobuf::Enum for KvOperationType {
+    const NAME: &'static str = "KvOperationType";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<KvOperationType> {
+        match value {
+            1 => ::std::option::Option::Some(KvOperationType::KvOperation_Add),
+            2 => ::std::option::Option::Some(KvOperationType::KvOperation_Update),
+            3 => ::std::option::Option::Some(KvOperationType::KvOperation_Delete),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<KvOperationType> {
+        match str {
+            "KvOperation_Add" => ::std::option::Option::Some(KvOperationType::KvOperation_Add),
+            "KvOperation_Update" => ::std::option::Option::Some(KvOperationType::KvOperation_Update),
+            "KvOperation_Delete" => ::std::option::Option::Some(KvOperationType::KvOperation_Delete),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [KvOperationType] = &[
+        KvOperationType::KvOperation_Add,
+        KvOperationType::KvOperation_Update,
+        KvOperationType::KvOperation_Delete,
+    ];
+}
+
+impl ::protobuf::EnumFull for KvOperationType {
+    fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().enum_by_package_relative_name("KvOperationType").unwrap()).clone()
+    }
+
+    fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
+        let index = match self {
+            KvOperationType::KvOperation_Add => 0,
+            KvOperationType::KvOperation_Update => 1,
+            KvOperationType::KvOperation_Delete => 2,
+        };
+        Self::enum_descriptor().value_by_index(index)
+    }
+}
+
+// Note, `Default` is implemented although default value is not 0
+impl ::std::default::Default for KvOperationType {
+    fn default() -> Self {
+        KvOperationType::KvOperation_Add
+    }
+}
+
+impl KvOperationType {
+    fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
+        ::protobuf::reflect::GeneratedEnumDescriptorData::new::<KvOperationType>("KvOperationType")
+    }
+}
+
 static file_descriptor_proto_data: &'static [u8] = b"\
     \n\x15messages-crypto.proto\x12\x19hw.trezor.messages.crypto\x1a\x15mess\
     ages-common.proto\x1a\roptions.proto\"\xcb\x01\n\x0eCipherKeyValue\x12\
@@ -2804,12 +4109,31 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x18\x01\x20\x02(\x0cR\nsessionKey\x12\x1d\n\npublic_key\x18\x02\x20\x01\
     (\x0cR\tpublicKey\"a\n\x13PaymentNotification\x12J\n\x0bpayment_req\x18\
     \x01\x20\x01(\x0b2).hw.trezor.messages.common.PaymentRequestR\npaymentRe\
-    q\"\x10\n\x0eKvGetAuthority\"S\n\x0bKvAuthority\x12%\n\x0eschema_version\
-    \x18\x01\x20\x02(\rR\rschemaVersion\x12\x1d\n\npublic_key\x18\x02\x20\
-    \x02(\x0cR\tpublicKey\"!\n\rKvGetRecordId\x12\x10\n\x03key\x18\x01\x20\
-    \x02(\tR\x03key\")\n\nKvRecordId\x12\x1b\n\trecord_id\x18\x01\x20\x02(\
-    \x0cR\x08recordIdB>\n#com.satoshilabs.trezor.lib.protobufB\x13TrezorMess\
-    ageCrypto\x80\xa6\x1d\x01\
+    q\"\xa8\x01\n\x06KvHead\x12%\n\x0eschema_version\x18\x01\x20\x02(\rR\rsc\
+    hemaVersion\x12\x10\n\x03seq\x18\x02\x20\x02(\x04R\x03seq\x12!\n\x0creco\
+    rds_root\x18\x03\x20\x02(\x0cR\x0brecordsRoot\x12$\n\x0eprev_head_hash\
+    \x18\x04\x20\x01(\x0cR\x0cprevHeadHash\x12\x1c\n\tsignature\x18\x05\x20\
+    \x02(\x0cR\tsignature\"\xb3\x01\n\x13KvSparseMerkleProof\x12\x19\n\x08le\
+    af_key\x18\x01\x20\x02(\x0cR\x07leafKey\x12\x1b\n\tleaf_hash\x18\x02\x20\
+    \x01(\x0cR\x08leafHash\x12%\n\x0esibling_hashes\x18\x03\x20\x03(\x0cR\rs\
+    iblingHashes\x12\x16\n\x06exists\x18\x04\x20\x02(\x08R\x06exists\x12%\n\
+    \x0esibling_bitmap\x18\x05\x20\x01(\x0cR\rsiblingBitmap\"\x10\n\x0eKvGet\
+    Authority\"S\n\x0bKvAuthority\x12%\n\x0eschema_version\x18\x01\x20\x02(\
+    \rR\rschemaVersion\x12\x1d\n\npublic_key\x18\x02\x20\x02(\x0cR\tpublicKe\
+    y\"!\n\rKvGetRecordId\x12\x10\n\x03key\x18\x01\x20\x02(\tR\x03key\")\n\n\
+    KvRecordId\x12\x1b\n\trecord_id\x18\x01\x20\x02(\x0cR\x08recordId\"\xd8\
+    \x02\n\x10KvSignTransition\x12H\n\toperation\x18\x01\x20\x02(\x0e2*.hw.t\
+    rezor.messages.crypto.KvOperationTypeR\toperation\x12\x10\n\x03key\x18\
+    \x02\x20\x02(\tR\x03key\x12<\n\x08old_head\x18\x03\x20\x02(\x0b2!.hw.tre\
+    zor.messages.crypto.KvHeadR\x07oldHead\x12\x1b\n\told_value\x18\x04\x20\
+    \x01(\tR\x08oldValue\x12\x1b\n\tnew_value\x18\x05\x20\x01(\tR\x08newValu\
+    e\x12D\n\x05proof\x18\x06\x20\x02(\x0b2..hw.trezor.messages.crypto.KvSpa\
+    rseMerkleProofR\x05proof\x12*\n\x11proposed_new_root\x18\x07\x20\x02(\
+    \x0cR\x0fproposedNewRoot\"R\n\x12KvSignedTransition\x12<\n\x08new_head\
+    \x18\x01\x20\x02(\x0b2!.hw.trezor.messages.crypto.KvHeadR\x07newHead*V\n\
+    \x0fKvOperationType\x12\x13\n\x0fKvOperation_Add\x10\x01\x12\x16\n\x12Kv\
+    Operation_Update\x10\x02\x12\x16\n\x12KvOperation_Delete\x10\x03B>\n#com\
+    .satoshilabs.trezor.lib.protobufB\x13TrezorMessageCrypto\x80\xa6\x1d\x01\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -2829,7 +4153,7 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             let mut deps = ::std::vec::Vec::with_capacity(2);
             deps.push(super::messages_common::file_descriptor().clone());
             deps.push(super::options::file_descriptor().clone());
-            let mut messages = ::std::vec::Vec::with_capacity(12);
+            let mut messages = ::std::vec::Vec::with_capacity(16);
             messages.push(CipherKeyValue::generated_message_descriptor_data());
             messages.push(CipheredKeyValue::generated_message_descriptor_data());
             messages.push(IdentityType::generated_message_descriptor_data());
@@ -2838,11 +4162,16 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(GetECDHSessionKey::generated_message_descriptor_data());
             messages.push(ECDHSessionKey::generated_message_descriptor_data());
             messages.push(PaymentNotification::generated_message_descriptor_data());
+            messages.push(KvHead::generated_message_descriptor_data());
+            messages.push(KvSparseMerkleProof::generated_message_descriptor_data());
             messages.push(KvGetAuthority::generated_message_descriptor_data());
             messages.push(KvAuthority::generated_message_descriptor_data());
             messages.push(KvGetRecordId::generated_message_descriptor_data());
             messages.push(KvRecordId::generated_message_descriptor_data());
-            let mut enums = ::std::vec::Vec::with_capacity(0);
+            messages.push(KvSignTransition::generated_message_descriptor_data());
+            messages.push(KvSignedTransition::generated_message_descriptor_data());
+            let mut enums = ::std::vec::Vec::with_capacity(1);
+            enums.push(KvOperationType::generated_enum_descriptor_data());
             ::protobuf::reflect::GeneratedFileDescriptor::new_generated(
                 file_descriptor_proto(),
                 deps,

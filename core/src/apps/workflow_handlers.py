@@ -115,6 +115,8 @@ def _find_message_handler_module(msg_type: int) -> str:
         return "apps.misc.kv_get_authority"
     if msg_type == MessageType.KvGetRecordId:
         return "apps.misc.kv_get_record_id"
+    if msg_type == MessageType.KvSignTransition:
+        return "apps.misc.kv_sign_transition"
 
     # evolu
     if msg_type == MessageType.EvoluGetNode:
