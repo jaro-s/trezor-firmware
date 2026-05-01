@@ -40,6 +40,31 @@ def get_kv_record_id(session: "Session", key: str) -> messages.KvRecordId:
 
 
 @workflow(capability=messages.Capability.Crypto)
+def sign_kv_transition(
+    session: "Session",
+    operation: messages.KvOperationType,
+    key: str,
+    old_head: messages.KvHead,
+    proof: messages.KvSparseMerkleProof,
+    proposed_new_root: bytes,
+    old_value: Optional[str] = None,
+    new_value: Optional[str] = None,
+) -> messages.KvSignedTransition:
+    return session.call(
+        messages.KvSignTransition(
+            operation=operation,
+            key=key,
+            old_head=old_head,
+            old_value=old_value,
+            new_value=new_value,
+            proof=proof,
+            proposed_new_root=proposed_new_root,
+        ),
+        expect=messages.KvSignedTransition,
+    )
+
+
+@workflow(capability=messages.Capability.Crypto)
 def sign_identity(
     session: "Session",
     identity: messages.IdentityType,

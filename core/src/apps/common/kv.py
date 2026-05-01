@@ -118,6 +118,7 @@ def validate_transition(
     proof_leaf_key: AnyBytes,
     proof_leaf_hash: AnyBytes | None,
     proof_sibling_hashes: "Sequence[AnyBytes]",
+    proof_sibling_bitmap: AnyBytes | None = None,
     proposed_new_root: AnyBytes,
 ) -> dict[str, bytes | int]:
     if schema_version != SCHEMA_VERSION:
@@ -174,14 +175,22 @@ def validate_transition(
 
     if (
         kv_smt.compute_root_from_proof(
-            proof_leaf_key, proof_exists, old_leaf_hash, proof_sibling_hashes
+            proof_leaf_key,
+            proof_exists,
+            old_leaf_hash,
+            proof_sibling_hashes,
+            proof_sibling_bitmap,
         )
         != bytes(old_head_root)
     ):
         raise ValueError("Old proof does not match old root")
 
     new_root = kv_smt.compute_root_from_proof(
-        proof_leaf_key, new_leaf_hash is not None, new_leaf_hash, proof_sibling_hashes
+        proof_leaf_key,
+        new_leaf_hash is not None,
+        new_leaf_hash,
+        proof_sibling_hashes,
+        proof_sibling_bitmap,
     )
     if new_root != bytes(proposed_new_root):
         raise ValueError("Proposed new root mismatch")
@@ -216,6 +225,7 @@ def create_signed_transition(
     proof_leaf_key: AnyBytes,
     proof_leaf_hash: AnyBytes | None,
     proof_sibling_hashes: "Sequence[AnyBytes]",
+    proof_sibling_bitmap: AnyBytes | None = None,
     proposed_new_root: AnyBytes,
 ) -> dict[str, bytes | int]:
     new_head = validate_transition(
@@ -234,6 +244,7 @@ def create_signed_transition(
         proof_leaf_key=proof_leaf_key,
         proof_leaf_hash=proof_leaf_hash,
         proof_sibling_hashes=proof_sibling_hashes,
+        proof_sibling_bitmap=proof_sibling_bitmap,
         proposed_new_root=proposed_new_root,
     )
     signature = sign_head(
@@ -262,6 +273,7 @@ def verify_record(
     proof_leaf_key: AnyBytes,
     proof_leaf_hash: AnyBytes | None,
     proof_sibling_hashes: "Sequence[AnyBytes]",
+    proof_sibling_bitmap: AnyBytes | None = None,
 ) -> bool:
     if not verify_head(
         public_key,
@@ -288,4 +300,5 @@ def verify_record(
         True,
         leaf_hash,
         proof_sibling_hashes,
+        proof_sibling_bitmap,
     )

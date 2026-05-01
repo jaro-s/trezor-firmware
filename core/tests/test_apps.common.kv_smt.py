@@ -52,6 +52,21 @@ class TestKvSmt(unittest.TestCase):
             unhexlify(ROOT_AFTER_3_HEX),
         )
 
+    def test_compact_single_leaf_proof_verification(self):
+        record = RECORD_VECTORS[0]
+        leaf_key = unhexlify(record["record_id_hex"])
+        leaf_hash = kv_smt.leaf_hash(leaf_key, unhexlify(record["record_commitment_hex"]))
+        self.assertEqual(
+            kv_smt.compute_root_from_proof(
+                leaf_key,
+                True,
+                leaf_hash,
+                [],
+                b"\x00" * 32,
+            ),
+            unhexlify(ROOT_AFTER_1_HEX),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

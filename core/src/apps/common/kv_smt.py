@@ -65,14 +65,26 @@ def key_bit(leaf_key: AnyBytes, level: int) -> int:
     return (byte >> shift) & 1
 
 
+def _bitmap_bit(bitmap: AnyBytes, index: int) -> int:
+    byte = bitmap[index // 8]
+    shift = 7 - (index % 8)
+    return (byte >> shift) & 1
+
+
 def compute_root_from_proof(
     leaf_key: AnyBytes,
     exists: bool,
     proof_leaf_hash: AnyBytes | None,
     sibling_hashes: "Sequence[AnyBytes]",
+    sibling_bitmap: AnyBytes | None = None,
 ) -> bytes:
     _validate_hash_len(leaf_key, "leaf_key")
-    if len(sibling_hashes) != TREE_DEPTH:
+    bitmap_bytes = bytes(sibling_bitmap) if sibling_bitmap else b""
+    compact = bool(bitmap_bytes)
+    if compact:
+        if len(bitmap_bytes) != HASH_SIZE:
+            raise ValueError("Invalid sibling_bitmap length")
+    elif len(sibling_hashes) != TREE_DEPTH:
         raise ValueError("Invalid sibling_hashes length")
 
     if exists:
@@ -85,14 +97,28 @@ def compute_root_from_proof(
             raise ValueError("Absence proof must not include leaf hash")
         current = EMPTY_HASHES[TREE_DEPTH]
 
-    for index, sibling in enumerate(sibling_hashes):
-        sibling_hash = bytes(sibling)
-        _validate_hash_len(sibling_hash, "sibling")
+    sibling_index = 0
+    for index in range(TREE_DEPTH):
+        if compact:
+            if _bitmap_bit(bitmap_bytes, index):
+                if sibling_index >= len(sibling_hashes):
+                    raise ValueError("Missing compact sibling hash")
+                sibling_hash = bytes(sibling_hashes[sibling_index])
+                _validate_hash_len(sibling_hash, "sibling")
+                sibling_index += 1
+            else:
+                sibling_hash = EMPTY_HASHES[TREE_DEPTH - index]
+        else:
+            sibling_hash = bytes(sibling_hashes[index])
+            _validate_hash_len(sibling_hash, "sibling")
         level = TREE_DEPTH - 1 - index
         if key_bit(leaf_key, level) == 0:
             current = node_hash(current, sibling_hash)
         else:
             current = node_hash(sibling_hash, current)
+
+    if compact and sibling_index != len(sibling_hashes):
+        raise ValueError("Unexpected extra compact sibling hashes")
 
     return current
 
@@ -103,8 +129,9 @@ def verify_proof(
     exists: bool,
     proof_leaf_hash: AnyBytes | None,
     sibling_hashes: "Sequence[AnyBytes]",
+    sibling_bitmap: AnyBytes | None = None,
 ) -> bool:
     _validate_hash_len(expected_root, "expected_root")
     return compute_root_from_proof(
-        leaf_key, exists, proof_leaf_hash, sibling_hashes
+        leaf_key, exists, proof_leaf_hash, sibling_hashes, sibling_bitmap
     ) == bytes(expected_root)
