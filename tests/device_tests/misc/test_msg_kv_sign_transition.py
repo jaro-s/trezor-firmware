@@ -116,6 +116,40 @@ def _verify_head_signature(public_key: bytes, signature: bytes, digest: bytes) -
     return vk.verify_digest(signature[1:], digest, sigdecode=util.sigdecode_string)
 
 
+def _add_record(session: Session, key: str, value: str) -> tuple[bytes, messages.KvHead]:
+    record_id = misc.get_kv_record_id(session, key).record_id
+    commitment = _record_commitment(record_id, key, value)
+    leaf_hash = _leaf_hash(record_id, commitment)
+    new_root = _compute_root_from_proof(
+        record_id, True, leaf_hash, [], sibling_bitmap=EMPTY_BITMAP
+    )
+    old_head = messages.KvHead(
+        schema_version=1,
+        seq=0,
+        records_root=EMPTY_HASHES[0],
+        prev_head_hash=b"",
+        signature=b"",
+    )
+    proof = messages.KvSparseMerkleProof(
+        leaf_key=record_id,
+        sibling_hashes=[],
+        sibling_bitmap=EMPTY_BITMAP,
+        exists=False,
+    )
+    with session.test_ctx as client:
+        client.set_input_flow(InputFlowConfirmAllWarnings(client).get())
+        response = misc.sign_kv_transition(
+            session,
+            messages.KvOperationType.Add,
+            key,
+            old_head,
+            proof,
+            new_root,
+            new_value=value,
+        )
+    return record_id, response.new_head
+
+
 @pytest.mark.setup_client(mnemonic=MNEMONIC12)
 def test_sign_kv_add_transition(session: Session):
     key = "alice"
@@ -246,3 +280,90 @@ def test_sign_kv_add_transition_rejects_invalid_proof(session: Session):
             new_root,
             new_value=value,
         )
+
+
+@pytest.mark.setup_client(mnemonic=MNEMONIC12)
+def test_sign_kv_update_and_delete_transition(session: Session):
+    key = "alice"
+    initial_value = "value-one"
+    updated_value = "value-two"
+
+    record_id, head_after_add = _add_record(session, key, initial_value)
+    initial_commitment = _record_commitment(record_id, key, initial_value)
+    initial_leaf_hash = _leaf_hash(record_id, initial_commitment)
+
+    updated_commitment = _record_commitment(record_id, key, updated_value)
+    updated_leaf_hash = _leaf_hash(record_id, updated_commitment)
+    update_root = _compute_root_from_proof(
+        record_id, True, updated_leaf_hash, [], sibling_bitmap=EMPTY_BITMAP
+    )
+    update_proof = messages.KvSparseMerkleProof(
+        leaf_key=record_id,
+        leaf_hash=initial_leaf_hash,
+        sibling_hashes=[],
+        sibling_bitmap=EMPTY_BITMAP,
+        exists=True,
+    )
+
+    with session.test_ctx as client:
+        client.set_input_flow(InputFlowConfirmAllWarnings(client).get())
+        update_response = misc.sign_kv_transition(
+            session,
+            messages.KvOperationType.Update,
+            key,
+            head_after_add,
+            update_proof,
+            update_root,
+            old_value=initial_value,
+            new_value=updated_value,
+        )
+
+    assert update_response.new_head.schema_version == 1
+    assert update_response.new_head.seq == 2
+    assert update_response.new_head.records_root == update_root
+
+    authority = misc.get_kv_authority(session)
+    update_digest = _head_hash(
+        update_response.new_head.schema_version,
+        update_response.new_head.seq,
+        update_response.new_head.records_root,
+        update_response.new_head.prev_head_hash,
+    )
+    assert _verify_head_signature(
+        authority.public_key, update_response.new_head.signature, update_digest
+    )
+
+    delete_proof = messages.KvSparseMerkleProof(
+        leaf_key=record_id,
+        leaf_hash=updated_leaf_hash,
+        sibling_hashes=[],
+        sibling_bitmap=EMPTY_BITMAP,
+        exists=True,
+    )
+    empty_root = EMPTY_HASHES[0]
+
+    with session.test_ctx as client:
+        client.set_input_flow(InputFlowConfirmAllWarnings(client).get())
+        delete_response = misc.sign_kv_transition(
+            session,
+            messages.KvOperationType.Delete,
+            key,
+            update_response.new_head,
+            delete_proof,
+            empty_root,
+            old_value=updated_value,
+        )
+
+    assert delete_response.new_head.schema_version == 1
+    assert delete_response.new_head.seq == 3
+    assert delete_response.new_head.records_root == empty_root
+
+    delete_digest = _head_hash(
+        delete_response.new_head.schema_version,
+        delete_response.new_head.seq,
+        delete_response.new_head.records_root,
+        delete_response.new_head.prev_head_hash,
+    )
+    assert _verify_head_signature(
+        authority.public_key, delete_response.new_head.signature, delete_digest
+    )
