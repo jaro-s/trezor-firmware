@@ -51,6 +51,7 @@ if TYPE_CHECKING:
     from trezor.enums import FailureType  # noqa: F401
     from trezor.enums import HomescreenFormat  # noqa: F401
     from trezor.enums import InputScriptType  # noqa: F401
+    from trezor.enums import KvOperationType  # noqa: F401
     from trezor.enums import MessageType  # noqa: F401
     from trezor.enums import MoneroNetworkType  # noqa: F401
     from trezor.enums import MultisigPubkeysOrder  # noqa: F401
@@ -2017,6 +2018,50 @@ if TYPE_CHECKING:
         def is_type_of(cls, msg: Any) -> TypeGuard["PaymentNotification"]:
             return isinstance(msg, cls)
 
+    class KvHead(protobuf.MessageType):
+        schema_version: "int"
+        seq: "int"
+        records_root: "AnyBytes"
+        prev_head_hash: "AnyBytes | None"
+        signature: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            schema_version: "int",
+            seq: "int",
+            records_root: "AnyBytes",
+            signature: "AnyBytes",
+            prev_head_hash: "AnyBytes | None" = None,
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["KvHead"]:
+            return isinstance(msg, cls)
+
+    class KvSparseMerkleProof(protobuf.MessageType):
+        leaf_key: "AnyBytes"
+        leaf_hash: "AnyBytes | None"
+        sibling_hashes: "list[AnyBytes]"
+        exists: "bool"
+        sibling_bitmap: "AnyBytes | None"
+
+        def __init__(
+            self,
+            *,
+            leaf_key: "AnyBytes",
+            exists: "bool",
+            sibling_hashes: "list[AnyBytes] | None" = None,
+            leaf_hash: "AnyBytes | None" = None,
+            sibling_bitmap: "AnyBytes | None" = None,
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["KvSparseMerkleProof"]:
+            return isinstance(msg, cls)
+
     class KvGetAuthority(protobuf.MessageType):
 
         @classmethod
@@ -2065,6 +2110,46 @@ if TYPE_CHECKING:
 
         @classmethod
         def is_type_of(cls, msg: Any) -> TypeGuard["KvRecordId"]:
+            return isinstance(msg, cls)
+
+    class KvSignTransition(protobuf.MessageType):
+        operation: "KvOperationType"
+        key: "str"
+        old_head: "KvHead"
+        old_value: "str | None"
+        new_value: "str | None"
+        proof: "KvSparseMerkleProof"
+        proposed_new_root: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            operation: "KvOperationType",
+            key: "str",
+            old_head: "KvHead",
+            proof: "KvSparseMerkleProof",
+            proposed_new_root: "AnyBytes",
+            old_value: "str | None" = None,
+            new_value: "str | None" = None,
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["KvSignTransition"]:
+            return isinstance(msg, cls)
+
+    class KvSignedTransition(protobuf.MessageType):
+        new_head: "KvHead"
+
+        def __init__(
+            self,
+            *,
+            new_head: "KvHead",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["KvSignedTransition"]:
             return isinstance(msg, cls)
 
     class Initialize(protobuf.MessageType):

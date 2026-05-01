@@ -171,6 +171,11 @@ if TYPE_CHECKING:
         BYRON_WITNESS = 0
         SHELLEY_WITNESS = 1
 
+    class KvOperationType(IntEnum):
+        Add = 1
+        Update = 2
+        Delete = 3
+
     class BackupType(IntEnum):
         Bip39 = 0
         Slip39_Basic = 1
@@ -709,3 +714,5 @@ if TYPE_CHECKING:
         KvAuthority = 2111
         KvGetRecordId = 2112
         KvRecordId = 2113
+        KvSignTransition = 2114
+        KvSignedTransition = 2115
